@@ -8,7 +8,7 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 let resend: Resend | null = null;
 
 function getClient(): Resend | null {
-  if (!RESEND_API_KEY || RESEND_API_KEY === "re_LxqggRg7_Fa17HwNnJWQrixRuNxwV6uip") {
+  if (!RESEND_API_KEY) {
     console.warn("RESEND_API_KEY not configured — emails skipped");
     return null;
   }
