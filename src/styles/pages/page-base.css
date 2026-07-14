@@ -1,0 +1,864 @@
+/* ============================================
+   PAGE BASE — Unified Design Language
+   Source of Truth: Homepage (home.css)
+   
+   Every page inherits:
+   - Grid system
+   - Typography scale
+   - Color system (semantic tokens)
+   - Card language
+   - Button styles
+   - Border radius
+   - Shadows (ABES)
+   - Ambient blue elevation
+   - Hero atmosphere
+   - Motion language
+   ============================================ */
+
+/* ==========================================
+   1. PAGE HERO — Cinematic Standard
+   ========================================== */
+
+.page-hero {
+  position: relative;
+  min-height: var(--page-hero-min-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg-hero);
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.page-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 8s ease-out;
+}
+
+.page-hero.is-visible .page-hero-img {
+  transform: scale(1);
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 18, 21, 0.4) 0%,
+    rgba(10, 18, 21, 0.65) 50%,
+    rgba(10, 18, 21, 0.88) 100%
+  );
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 var(--space-8);
+}
+
+.page-hero-badge {
+  display: inline-block;
+  padding: var(--space-2) var(--space-5);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  margin-bottom: var(--space-6);
+  backdrop-filter: blur(10px);
+}
+
+.page-hero-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+  font-weight: var(--font-weight-medium);
+  color: #FFFFFF;
+  margin: 0 0 var(--space-6);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-tight);
+}
+
+.page-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-regular);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 650px;
+  margin: 0 auto var(--space-10);
+  line-height: var(--leading-body);
+}
+
+.page-hero-cta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.page-hero-scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.page-hero-scroll svg {
+  width: 28px;
+  height: 28px;
+  stroke: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ==========================================
+   2. SECTION LAYOUT — Consistent Spacing
+   ========================================== */
+
+.page-section {
+  padding: var(--page-section-padding) 0;
+}
+
+.page-section-sm {
+  padding: var(--page-section-padding-sm) 0;
+}
+
+.page-section-alt {
+  background: var(--bg-secondary);
+}
+
+.page-section-dark {
+  background: var(--gradient-primary);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/></svg>') no-repeat center;
+  background-size: 300px;
+  opacity: 0.5;
+}
+
+/* ==========================================
+   3. SECTION HEADERS — Editorial Pattern
+   ========================================== */
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-16);
+}
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--page-section-label-color);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  margin-bottom: var(--space-4);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--page-section-title-color);
+  margin: 0 0 var(--space-4);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.section-text {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--page-section-text-color);
+  line-height: var(--leading-body);
+  margin: 0;
+}
+
+/* ==========================================
+   4. CARD LANGUAGE — ABES Shadow System
+   ========================================== */
+
+.card {
+  background: var(--page-card-bg);
+  border: var(--page-card-border);
+  border-radius: var(--page-card-radius);
+  padding: var(--page-card-padding);
+  box-shadow: var(--page-card-shadow);
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--page-card-shadow-hover);
+}
+
+.card-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: calc(-1 * var(--page-card-padding));
+  margin-bottom: var(--space-6);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-label {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--page-section-label-color);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin-bottom: var(--space-3);
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+  line-height: var(--leading-h3);
+}
+
+.card-text {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-body);
+  margin: 0 0 var(--space-4);
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: gap var(--duration-fast) var(--ease-out);
+}
+
+.card-link:hover {
+  gap: var(--space-3);
+}
+
+.card-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================
+   5. GRID SYSTEMS — Homepage Patterns
+   ========================================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+/* ==========================================
+   6. TYPOGRAPHY — Inherited from Homepage
+   ========================================== */
+
+.heading-display {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+.heading-1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+.heading-2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+.heading-3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-h3);
+  color: var(--text-heading);
+}
+
+.heading-4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-h3);
+  color: var(--text-heading);
+}
+
+.body-lg {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+.body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+/* ==========================================
+   7. BUTTONS — Homepage Standard
+   ========================================== */
+
+.btn-page-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.btn-page-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.btn-page-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.btn-page-secondary:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.btn-page-white {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: #FFFFFF;
+  color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.btn-page-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-page-outline-white {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.btn-page-outline-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   8. IMPACT NUMBERS — Homepage Pattern
+   ========================================== */
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.impact-card {
+  text-align: center;
+  padding: var(--space-8);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.impact-card:hover {
+  transform: translateY(-4px);
+}
+
+.impact-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  margin: 0 0 var(--space-2);
+  line-height: 1;
+}
+
+.impact-label {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==========================================
+   9. CTA SECTION — Homepage Pattern
+   ========================================== */
+
+.cta-section {
+  padding: var(--page-section-padding) 0;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(42, 125, 95, 0.04) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  pointer-events: none;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-10);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.cta-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.cta-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-50);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  transition: background-color var(--duration-fast);
+}
+
+.cta-card:hover .cta-icon {
+  background: var(--color-primary);
+}
+
+.cta-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--color-primary);
+  transition: stroke var(--duration-fast);
+}
+
+.cta-card:hover .cta-icon svg {
+  stroke: #FFFFFF;
+}
+
+.cta-heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.cta-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-body);
+  margin: 0 0 var(--space-6);
+  flex: 1;
+}
+
+.cta-arrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: gap var(--duration-fast);
+}
+
+.cta-card:hover .cta-arrow {
+  gap: var(--space-3);
+}
+
+.cta-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================
+   10. MOTION LANGUAGE — From Homepage
+   ========================================== */
+
+/* Scroll-triggered fade-in */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-normal) var(--ease-out),
+              transform var(--duration-normal) var(--ease-out);
+}
+
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+
+/* ==========================================
+   11. RESPONSIVE — Homepage Breakpoints
+   ========================================== */
+
+@media (max-width: 1200px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-2-1,
+  .grid-1-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-hero {
+    min-height: 90vh;
+  }
+  
+  .page-section {
+    padding: var(--page-section-padding-sm) 0;
+  }
+  
+  .section-header {
+    margin-bottom: var(--space-10);
+  }
+  
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .impact-card {
+    padding: var(--space-6);
+  }
+  
+  .page-hero-scroll {
+    display: none;
+  }
+}
+
+/* ==========================================
+   12. DARK MODE — Comprehensive
+   ========================================== */
+
+/* --- Cards & Surfaces --- */
+[data-theme="dark"] .card {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .cta-card {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .cta-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Buttons --- */
+[data-theme="dark"] .btn-page-white {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .btn-page-white:hover {
+  background: var(--bg-tertiary);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Section Backgrounds --- */
+[data-theme="dark"] .page-section-alt {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .page-section-dark {
+  background: var(--bg-primary);
+}
+
+/* --- Section Headers --- */
+[data-theme="dark"] .section-label {
+  color: var(--color-primary-400);
+}
+
+[data-theme="dark"] .section-title {
+  color: var(--text-heading);
+}
+
+[data-theme="dark"] .section-text {
+  color: var(--text-secondary);
+}
+
+/* --- Form Elements --- */
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-textarea,
+[data-theme="dark"] .form-select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--input-text);
+}
+
+[data-theme="dark"] .form-input::placeholder,
+[data-theme="dark"] .form-textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
+[data-theme="dark"] .form-input:focus,
+[data-theme="dark"] .form-textarea:focus,
+[data-theme="dark"] .form-select:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgba(62, 191, 138, 0.12);
+}
+
+[data-theme="dark"] .form-label {
+  color: var(--text-primary);
+}
+
+/* --- Impact Cards --- */
+[data-theme="dark"] .impact-card {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .impact-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .impact-icon {
+  background: var(--color-primary-100);
+}
+
+[data-theme="dark"] .impact-icon svg {
+  stroke: var(--color-primary-400);
+}
+
+/* --- Divider --- */
+[data-theme="dark"] hr {
+  border-color: var(--border-subtle);
+}
+
+/* --- Scroll Animations --- */
+[data-theme="dark"] .animate-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* ==========================================
+   13. REDUCED MOTION — Accessibility
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-img {
+    transform: none;
+    transition: none;
+  }
+  
+  .page-hero-scroll {
+    animation: none;
+  }
+  
+  .animate-on-scroll,
+  .stagger-children > *,
+  .card,
+  .impact-card,
+  .cta-card {
+    transition: none;
+  }
+}

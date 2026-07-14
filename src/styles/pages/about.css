@@ -1,0 +1,1126 @@
+/* ============================================
+   ABOUT PAGE — World-Class Creative Design
+   Editorial Layout · Large Photography
+   Storytelling · Calm Motion
+   ============================================ */
+
+/* ==========================================
+   1. CINEMATIC HERO — Full Bleed
+   ========================================== */
+
+.ab-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ab-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.ab-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ab-hero.is-visible .ab-hero-img {
+  transform: scale(1);
+}
+
+.ab-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 18, 21, 0.3) 0%,
+    rgba(10, 18, 21, 0.5) 40%,
+    rgba(10, 18, 21, 0.85) 100%
+  );
+}
+
+.ab-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 960px;
+  padding: 0 2rem;
+}
+
+.ab-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ab-hero-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.ab-hero-tag {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ab-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.ab-hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+.ab-hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Scroll Indicator */
+.ab-hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ab-hero-scroll-text {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ab-hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.5; transform: scaleY(0.6); }
+}
+
+/* ==========================================
+   BUTTONS — Custom
+   ========================================== */
+
+.ab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-spring),
+              box-shadow 0.3s var(--ease-out),
+              background-color 0.3s var(--ease-out),
+              border-color 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.ab-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.ab-btn:hover::after {
+  opacity: 1;
+}
+
+.ab-btn:active {
+  transform: scale(0.97);
+}
+
+.ab-btn-white {
+  background: #FFFFFF;
+  color: var(--color-primary);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ab-btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.22);
+}
+
+.ab-btn-ghost {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+.ab-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+/* ==========================================
+   2. EDITORIAL STORY
+   ========================================== */
+
+.ab-story {
+  padding: 10rem 0;
+  background: var(--bg-primary);
+}
+
+.ab-story-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Opening Statement */
+.ab-story-opening {
+  max-width: 800px;
+  margin: 0 auto 8rem;
+  text-align: center;
+}
+
+.ab-story-label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.ab-story-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ab-story-intro {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ab-story-lead {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin: 0 0 1.5rem;
+}
+
+.ab-story-body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Full Width Image */
+.ab-story-hero-image {
+  margin: 0 -4rem 8rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.ab-story-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ab-story-hero-image:hover img {
+  transform: scale(1.02);
+}
+
+.ab-story-caption {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(10, 18, 21, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 100px;
+}
+
+.ab-story-caption-year {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.ab-story-caption-text {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Two Column Layout */
+.ab-story-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+.ab-story-subhead {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem;
+  line-height: 1.3;
+}
+
+.ab-story-col-text p {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0 0 1.25rem;
+}
+
+.ab-story-col-text p:last-child {
+  margin-bottom: 0;
+}
+
+.ab-story-col-image {
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.ab-story-col-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ab-story-col-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Closing Statement */
+.ab-story-closing {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ab-story-closing-inner {
+  padding: 4rem;
+  background: var(--bg-secondary);
+  border-radius: 1.5rem;
+  border-left: 4px solid var(--color-primary);
+}
+
+.ab-story-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==========================================
+   3. IMPACT NUMBERS
+   ========================================== */
+
+.ab-impact {
+  padding: 6rem 0;
+  background: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.ab-impact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/></svg>') no-repeat center;
+  background-size: 200px;
+}
+
+.ab-impact-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.ab-impact-item {
+  text-align: center;
+  flex: 1;
+}
+
+.ab-impact-number {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1;
+  display: inline;
+}
+
+.ab-impact-suffix {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1;
+}
+
+.ab-impact-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.ab-impact-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   4. VISION & MISSION
+   ========================================== */
+
+.ab-vision {
+  padding: 10rem 0;
+  background: var(--bg-primary);
+}
+
+.ab-vision-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.ab-vision-block {
+  padding: 4rem;
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s var(--ease-emphasis),
+              box-shadow 0.5s var(--ease-emphasis);
+}
+
+.ab-vision-block:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.ab-vision-mission {
+  background: var(--gradient-primary);
+}
+
+.ab-vision-vision {
+  background: var(--gradient-secondary);
+}
+
+.ab-vision-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  margin-bottom: 2rem;
+}
+
+.ab-vision-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #FFFFFF;
+}
+
+.ab-vision-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.ab-vision-text {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Vision Content Wrapper */
+.ab-vision-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================
+   5. CORE VALUES
+   ========================================== */
+
+.ab-values {
+  padding: 10rem 0;
+  background: var(--bg-secondary);
+}
+
+.ab-values-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.ab-values-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.ab-values-label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.ab-values-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ab-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.ab-value-card {
+  padding: 3rem 2.5rem;
+  background: var(--bg-primary);
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.5s var(--ease-emphasis),
+              box-shadow 0.5s var(--ease-emphasis),
+              border-color 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.ab-value-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(1.25rem + 1px);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(42, 125, 95, 0.06) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.ab-value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--abes-shadow-card-hover);
+  border-color: var(--color-primary);
+}
+
+.ab-value-card:hover::before {
+  opacity: 1;
+}
+
+.ab-value-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-50);
+  border-radius: 14px;
+  margin-bottom: 1.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.ab-value-card:hover .ab-value-icon {
+  background: var(--color-primary);
+}
+
+.ab-value-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--color-primary);
+  transition: stroke 0.3s ease;
+}
+
+.ab-value-card:hover .ab-value-icon svg {
+  stroke: #FFFFFF;
+}
+
+.ab-value-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.ab-value-desc {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================
+   6. LEADERSHIP
+   ========================================== */
+
+/* ==========================================
+   7. WHY WE EXIST
+   ========================================== */
+
+.ab-why {
+  position: relative;
+  padding: 12rem 0;
+  overflow: hidden;
+}
+
+.ab-why-media {
+  position: absolute;
+  inset: 0;
+}
+
+.ab-why-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ab-why-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(42, 125, 95, 0.92) 0%,
+    rgba(10, 18, 21, 0.95) 100%
+  );
+}
+
+.ab-why-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.ab-why-mark {
+  font-family: Georgia, serif;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.15);
+  line-height: 0.5;
+  margin-bottom: 1rem;
+}
+
+.ab-why-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+  font-style: italic;
+}
+
+.ab-why-author {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ==========================================
+   8. CALL TO ACTION
+   ========================================== */
+
+.ab-cta {
+  padding: 10rem 0;
+  background: var(--bg-primary);
+}
+
+.ab-cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.ab-cta-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.ab-cta-label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.ab-cta-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ab-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.ab-cta-card {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background: var(--bg-secondary);
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition: transform 0.5s var(--ease-emphasis),
+              box-shadow 0.5s var(--ease-emphasis),
+              border-color 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.ab-cta-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(1.5rem + 1px);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(42, 125, 95, 0.06) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.ab-cta-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--abes-shadow-card-hover);
+  border-color: var(--color-primary);
+}
+
+.ab-cta-card:hover::before {
+  opacity: 1;
+}
+
+.ab-cta-featured {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ab-cta-featured .ab-cta-icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ab-cta-featured .ab-cta-icon svg {
+  stroke: #FFFFFF;
+}
+
+.ab-cta-featured .ab-cta-heading {
+  color: #FFFFFF;
+}
+
+.ab-cta-featured .ab-cta-desc {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ab-cta-featured .ab-cta-arrow {
+  color: #FFFFFF;
+}
+
+.ab-cta-featured:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.ab-cta-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-50);
+  border-radius: 14px;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.ab-cta-card:hover .ab-cta-icon {
+  background: var(--color-primary);
+}
+
+.ab-cta-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--color-primary);
+  transition: stroke 0.3s ease;
+}
+
+.ab-cta-card:hover .ab-cta-icon svg {
+  stroke: #FFFFFF;
+}
+
+.ab-cta-heading {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.ab-cta-desc {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+  flex: 1;
+}
+
+.ab-cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: gap 0.3s ease;
+}
+
+.ab-cta-card:hover .ab-cta-arrow {
+  gap: 0.75rem;
+}
+
+.ab-cta-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================
+   SCROLL ANIMATIONS
+   ========================================== */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1023px) {
+  .ab-story-hero-image {
+    margin: 0 0 6rem;
+  }
+  
+  .ab-story-columns {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .ab-vision-inner {
+    grid-template-columns: 1fr;
+  }
+  
+  .ab-impact-inner {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .ab-impact-divider {
+    display: none;
+  }
+  
+  .ab-impact-item {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ab-hero {
+    min-height: 90vh;
+  }
+  
+  .ab-story,
+  .ab-vision,
+  .ab-values,
+  .ab-why,
+  .ab-cta {
+    padding: 6rem 0;
+  }
+  
+  .ab-story-hero-image {
+    margin: 0 0 4rem;
+    border-radius: 1rem;
+  }
+  
+  .ab-story-closing-inner {
+    padding: 2.5rem;
+  }
+  
+  .ab-values-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ab-cta-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .ab-why {
+    padding: 8rem 0;
+  }
+  
+  .ab-why-mark {
+    font-size: 5rem;
+  }
+  
+  .ab-hero-scroll {
+    display: none;
+  }
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+/* Story Section */
+[data-theme="dark"] .ab-story-closing-inner {
+  background: var(--bg-tertiary);
+  border-left-color: var(--color-primary-400);
+}
+
+/* Value Cards */
+[data-theme="dark"] .ab-value-card {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .ab-value-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .ab-value-icon {
+  background: var(--color-primary-100);
+}
+
+[data-theme="dark"] .ab-value-icon svg {
+  stroke: var(--color-primary-400);
+}
+
+[data-theme="dark"] .ab-value-card:hover .ab-value-icon {
+  background: var(--color-primary);
+}
+
+[data-theme="dark"] .ab-value-card:hover .ab-value-icon svg {
+  stroke: #FFFFFF;
+}
+
+/* Vision Blocks */
+[data-theme="dark"] .ab-vision-block {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .ab-vision-icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* CTA Cards */
+[data-theme="dark"] .ab-cta-card {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .ab-cta-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .ab-cta-featured {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+[data-theme="dark"] .ab-cta-featured:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .ab-cta-icon {
+  background: var(--color-primary-100);
+}
+
+[data-theme="dark"] .ab-cta-icon svg {
+  stroke: var(--color-primary-400);
+}
+
+[data-theme="dark"] .ab-cta-card:hover .ab-cta-icon {
+  background: var(--color-primary);
+}
+
+[data-theme="dark"] .ab-cta-card:hover .ab-cta-icon svg {
+  stroke: #FFFFFF;
+}
+
+[data-theme="dark"] .ab-cta-featured .ab-cta-icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .ab-cta-featured .ab-cta-icon svg {
+  stroke: #FFFFFF;
+}
+
+/* Impact Section */
+[data-theme="dark"] .ab-impact {
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.3);
+}
+
+/* Story Quote */
+[data-theme="dark"] .ab-story-closing-inner {
+  background: var(--bg-tertiary);
+  border-left-color: var(--color-primary-400);
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-hero-img,
+  .ab-story-hero-image img,
+  .ab-story-col-image img {
+    transition: none;
+    transform: none;
+  }
+  
+  .ab-hero-scroll-line {
+    animation: none;
+  }
+  
+  .animate-on-scroll {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .ab-value-card,
+  .ab-cta-card,
+  .ab-vision-block {
+    transition: none;
+  }
+}

@@ -1,0 +1,763 @@
+/* ============================================
+   OPADOLA CARE INITIATIVE — DESIGN SYSTEM 2.0
+   Brand-Driven Design Tokens
+   Source of Truth: Official Logo
+   ============================================ */
+
+:root {
+  /* ==========================================
+     BRAND COLORS — From Logo Analysis
+     ========================================== */
+  
+  /* Primary — Teal Green (Logo Left Hand) */
+  --color-primary-50: #E8F5F0;
+  --color-primary-100: #C5E8DB;
+  --color-primary-200: #9FDAC4;
+  --color-primary-300: #73C8A8;
+  --color-primary-400: #4DB892;
+  --color-primary-500: #2A7D5F; /* Logo Color */
+  --color-primary-600: #236A50;
+  --color-primary-700: #1C5741;
+  --color-primary-800: #154432;
+  --color-primary-900: #0E3123;
+  --color-primary-950: #071A12;
+  
+  /* Primary Convenience Aliases */
+  --color-primary: #2A7D5F;
+  --color-primary-light: #4DB892;
+  --color-primary-dark: #1C5741;
+  --color-primary-rgb: 42, 125, 95;
+  
+  /* Secondary — Steel Blue (Logo Right Hand) */
+  --color-secondary-50: #E8F2FA;
+  --color-secondary-100: #C5DFF2;
+  --color-secondary-200: #9DCCE8;
+  --color-secondary-300: #70B7DD;
+  --color-secondary-400: #4BA5D4;
+  --color-secondary-500: #2980B9; /* Logo Color */
+  --color-secondary-600: #226A9C;
+  --color-secondary-700: #1B547F;
+  --color-secondary-800: #143E62;
+  --color-secondary-900: #0D2845;
+  --color-secondary-950: #061428;
+  
+  /* Secondary Convenience Aliases */
+  --color-secondary: #2980B9;
+  --color-secondary-light: #4BA5D4;
+  --color-secondary-dark: #1B547F;
+  --color-secondary-rgb: 41, 128, 185;
+  
+  /* Accent — Legacy Gold (Logo Edge Highlight) */
+  --color-accent-50: #FDF6E8;
+  --color-accent-100: #F9E8C5;
+  --color-accent-200: #F4D89F;
+  --color-accent-300: #EFC776;
+  --color-accent-400: #EBB94F;
+  --color-accent-500: #C9963B; /* Logo Color */
+  --color-accent-600: #A87D31;
+  --color-accent-700: #876427;
+  --color-accent-800: #664B1D;
+  --color-accent-900: #453213;
+  --color-accent-950: #241A09;
+  
+  /* Accent Convenience Aliases */
+  --color-accent: #C9963B;
+  --color-accent-light: #EBB94F;
+  --color-accent-dark: #A87D31;
+  --color-accent-rgb: 201, 150, 59;
+  
+  /* ==========================================
+     NEUTRALS — Derived from Logo
+     ========================================== */
+  
+  /* Warm Cream (Logo Figures) */
+  --color-cream-50: #FDFBF7;
+  --color-cream-100: #FAF8F3;
+  --color-cream-200: #F5F3EE;
+  --color-cream-300: #EDEAE3;
+  --color-cream-400: #E2DFD8;
+  --color-cream-500: #D1CEC7;
+  
+  /* Dark Charcoal (Logo Outlines) */
+  --color-charcoal-50: #E8EAEB;
+  --color-charcoal-100: #C5C9CC;
+  --color-charcoal-200: #9EA3A8;
+  --color-charcoal-300: #777E84;
+  --color-charcoal-400: #5A6269;
+  --color-charcoal-500: #4A5A60;
+  --color-charcoal-600: #3A4A50;
+  --color-charcoal-700: #2A3A40;
+  --color-charcoal-800: #1A2A30;
+  --color-charcoal-900: #0E1A1F;
+  
+  /* ==========================================
+     SEMANTIC COLORS
+     ========================================== */
+  
+  --color-success: #2A7D5F;
+  --color-success-light: #4DB892;
+  --color-success-dark: #1C5741;
+  
+  --color-warning: #C9963B;
+  --color-warning-light: #EBB94F;
+  --color-warning-dark: #A87D31;
+  
+  --color-info: #2980B9;
+  --color-info-light: #4BA5D4;
+  --color-info-dark: #1B547F;
+  
+  --color-error: #C43333;
+  --color-error-light: #E05555;
+  --color-error-dark: #A02828;
+  
+  /* ==========================================
+     BACKGROUNDS — Light Theme
+     ========================================== */
+  
+  --bg-primary: #FDFBF7;
+  --bg-secondary: #F5F3EE;
+  --bg-tertiary: #EDEAE3;
+  --bg-hero: #FDFBF7;
+  --bg-footer: #0E3123;
+  --bg-card: #FFFFFF;
+  --bg-card-secondary: #F9F7F3;
+  
+  /* ==========================================
+     SURFACES
+     ========================================== */
+  
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F9F7F3;
+  --surface-tertiary: #F5F3EE;
+  --surface-glass: rgba(255, 255, 255, 0.7);
+  --surface-glass-border: rgba(255, 255, 255, 0.2);
+  --surface-elevated: #FFFFFF;
+  
+  /* ==========================================
+     TYPOGRAPHY
+     ========================================== */
+  
+  /* Font Families */
+  --font-heading: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Font Sizes — Fluid Typography */
+  --text-display: clamp(3rem, 5vw, 4.5rem);
+  --text-h1: clamp(2.5rem, 4vw, 3.5rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-h4: clamp(1.1rem, 1.5vw, 1.25rem);
+  --text-h5: 1.125rem;
+  --text-h6: 1rem;
+  --text-display-lg: clamp(3rem, 6vw, 5.5rem);
+  --text-display-md: clamp(2.5rem, 5vw, 4.5rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.75rem;
+  --text-small: 0.6875rem;
+  
+  /* Line Heights */
+  --leading-display: 1.05;
+  --leading-h1: 1.1;
+  --leading-h2: 1.2;
+  --leading-h3: 1.3;
+  --leading-body: 1.7;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  
+  /* Text Colors */
+  --text-primary: #1A2A30;
+  --text-secondary: #4A5A60;
+  --text-muted: #8A9699;
+  --text-inverse: #FFFFFF;
+  --text-link: #2A7D5F;
+  --text-link-hover: #236A50;
+  --text-heading: #1A2A30;
+  
+  /* ==========================================
+     BORDERS
+     ========================================== */
+  
+  --border-subtle: #E8E5DE;
+  --border-strong: #D1CEC7;
+  --border-focus: #2A7D5F;
+  --border-divider: #E2DFD8;
+  --border-card: #E8E5DE;
+  
+  /* ==========================================
+     SPACING (8px base grid)
+     ========================================== */
+  
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  
+  /* Section Spacing */
+  --section-padding: clamp(4rem, 10vw, 8rem);
+  --section-padding-lg: clamp(6rem, 12vw, 10rem);
+  
+  /* ==========================================
+     BORDER RADIUS
+     ========================================== */
+  
+  --radius-xs: 0.25rem;   /* 4px */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.75rem;   /* 12px */
+  --radius-lg: 1rem;      /* 16px */
+  --radius-xl: 1.25rem;   /* 20px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-3xl: 2rem;     /* 32px */
+  --radius-full: 9999px;
+  
+  /* ==========================================
+     SHADOWS — Green-Tinted
+     ========================================== */
+  
+  --shadow-xs: 0 1px 2px rgba(42, 125, 95, 0.04);
+  --shadow-sm: 0 2px 4px rgba(42, 125, 95, 0.06);
+  --shadow-md: 0 4px 12px rgba(42, 125, 95, 0.08);
+  --shadow-lg: 0 8px 24px rgba(42, 125, 95, 0.1);
+  --shadow-xl: 0 16px 48px rgba(42, 125, 95, 0.12);
+  --shadow-inner: inset 0 2px 4px rgba(42, 125, 95, 0.04);
+  
+  /* Card Shadows */
+  --shadow-card: 0 4px 24px rgba(42, 125, 95, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(42, 125, 95, 0.1);
+  
+  /* Button Shadows */
+  --shadow-button: 0 4px 16px rgba(42, 125, 95, 0.2);
+  --shadow-button-hover: 0 6px 20px rgba(42, 125, 95, 0.25);
+  
+  /* Colored Shadows */
+  --shadow-primary: 0 4px 16px rgba(42, 125, 95, 0.2);
+  --shadow-secondary: 0 4px 16px rgba(41, 128, 185, 0.2);
+  --shadow-accent: 0 4px 16px rgba(201, 150, 59, 0.2);
+  
+  /* ==========================================
+     GRADIENTS
+     ========================================== */
+  
+  --gradient-primary: linear-gradient(135deg, #2A7D5F 0%, #236A50 100%);
+  --gradient-secondary: linear-gradient(135deg, #2980B9 0%, #226A9C 100%);
+  --gradient-brand: linear-gradient(135deg, #2A7D5F 0%, #2980B9 100%);
+  --gradient-warm: linear-gradient(135deg, #2A7D5F 0%, #C9963B 100%);
+  --gradient-surface: linear-gradient(180deg, #FDFBF7 0%, #F5F3EE 100%);
+  --gradient-hero: linear-gradient(135deg, #FDFBF7 0%, #E8F5F0 100%);
+  --gradient-footer: linear-gradient(180deg, #0E3123 0%, #071A12 100%);
+  
+  /* ==========================================
+     GLOWS — Max 25% Opacity
+     ========================================== */
+  
+  --glow-primary: 0 0 20px rgba(42, 125, 95, 0.15);
+  --glow-secondary: 0 0 20px rgba(41, 128, 185, 0.15);
+  --glow-accent: 0 0 20px rgba(201, 150, 59, 0.15);
+  --glow-soft: 0 0 40px rgba(42, 125, 95, 0.08);
+  
+  /* ==========================================
+     AMBIENT BLUE ELEVATION SYSTEM (ABES)
+     Hope Blue #2980B9 — Logo Derived
+     Light originates beneath component
+     ========================================== */
+  
+  /* Blue Tonal Variations — Mathematical Derivation */
+  --abes-blue-50: rgba(41, 128, 185, 0.05);
+  --abes-blue-75: rgba(41, 128, 185, 0.075);
+  --abes-blue-100: rgba(41, 128, 185, 0.10);
+  --abes-blue-125: rgba(41, 128, 185, 0.125);
+  --abes-blue-150: rgba(41, 128, 185, 0.15);
+  --abes-blue-175: rgba(41, 128, 185, 0.175);
+  --abes-blue-200: rgba(41, 128, 185, 0.20);
+  --abes-blue-250: rgba(41, 128, 185, 0.25);
+  
+  /* Elevation Shadows — Two-Layer System */
+  --abes-shadow-ambient: 0 8px 40px var(--abes-blue-125);
+  --abes-shadow-ambient-hover: 0 12px 48px var(--abes-blue-200);
+  --abes-shadow-card: 
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 12px 40px var(--abes-blue-100);
+  --abes-shadow-card-hover: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 16px 48px var(--abes-blue-175);
+  
+  /* Section Container Ambient */
+  --abes-section-glow: 0 20px 80px var(--abes-blue-075);
+  
+  /* Transition Timing */
+  --abes-transition: 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* ==========================================
+     TRANSITIONS — Premium Motion Tokens
+     ========================================== */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-emphasis: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-magnetic: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --duration-instant: 75ms;
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --duration-enter: 800ms;
+  --duration-lag: 1000ms;
+  --duration-stagger: 1200ms;
+  
+  /* ==========================================
+     Z-INDEX SCALE
+     ========================================== */
+  
+  --z-below: -1;
+  --z-normal: 1;
+  --z-above: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-max: 9999;
+  
+  /* ==========================================
+     CONTAINER WIDTHS
+     ========================================== */
+  
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1440px;
+  
+  /* Desktop Margins */
+  --margin-desktop: 80px;
+  --margin-tablet: 48px;
+  --margin-mobile: 24px;
+  
+  /* Grid Gutters */
+  --gutter: 32px;
+  
+  /* ==========================================
+     HEADER
+     ========================================== */
+  
+  --header-height: 80px;
+  --header-height-scrolled: 72px;
+  --header-bg-scrolled: rgba(253, 251, 247, 0.97);
+  
+  /* ==========================================
+     INPUTS
+     ========================================== */
+  
+  --input-bg: #FFFFFF;
+  --input-border: #D1CEC7;
+  --input-border-focus: #2A7D5F;
+  --input-border-error: #C43333;
+  --input-text: #1A2A30;
+  --input-placeholder: #8A9699;
+
+  /* ==========================================
+     GLASS MORPHISM
+     ========================================== */
+
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(16px);
+
+  /* ==========================================
+     INTERACTIVE STATES
+     ========================================== */
+
+  --interactive-scale: scale(1.03);
+  --interactive-scale-subtle: scale(1.02);
+  --interactive-lift: translateY(-3px);
+  --interactive-lift-strong: translateY(-6px);
+  --interactive-glow: 0 0 20px rgba(42, 125, 95, 0.15);
+  --interactive-glow-strong: 0 0 30px rgba(42, 125, 95, 0.25);
+
+  /* ==========================================
+     TEXTURE
+     ========================================== */
+
+  --noise-opacity: 0.015;
+  --grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+
+  /* ==========================================
+     LEGACY ALIASES — Backward Compatibility
+     Maps old token names to semantic tokens
+     ========================================== */
+
+  --color-white: #FFFFFF;
+  --color-ivory: #F5F3EE;
+  --color-black: #0A1215;
+  
+  /* Heritage Green — Alias to Primary */
+  --heritage-green-50: var(--color-primary-50);
+  --heritage-green-100: var(--color-primary-100);
+  --heritage-green-200: var(--color-primary-200);
+  --heritage-green-300: var(--color-primary-300);
+  --heritage-green-400: var(--color-primary-400);
+  --heritage-green-500: var(--color-primary-500);
+  --heritage-green-600: var(--color-primary-600);
+  --heritage-green-700: var(--color-primary-700);
+  --heritage-green-800: var(--color-primary-800);
+  --heritage-green-900: var(--color-primary-900);
+  
+  /* Legacy Gold — Alias to Accent */
+  --legacy-gold-50: var(--color-accent-50);
+  --legacy-gold-100: var(--color-accent-100);
+  --legacy-gold-200: var(--color-accent-200);
+  --legacy-gold-300: var(--color-accent-300);
+  --legacy-gold-400: var(--color-accent-400);
+  --legacy-gold-500: var(--color-accent-500);
+  --legacy-gold-600: var(--color-accent-600);
+  --legacy-gold-700: var(--color-accent-700);
+  --legacy-gold-800: var(--color-accent-800);
+  --legacy-gold-900: var(--color-accent-900);
+  
+  /* Border Light — Alias to Border Subtle */
+  --border-light: var(--border-subtle);
+  
+  /* Container Max Width — Alias to Container XL */
+  --container-max-width: var(--container-xl);
+  
+  /* Text Inverse Muted — For dark backgrounds */
+  --text-inverse-muted: rgba(255, 255, 255, 0.6);
+  
+  /* ==========================================
+     PAGE DESIGN LANGUAGE — Source of Truth
+     Extracted from homepage patterns
+     ========================================== */
+  
+  /* Section Spacing — Consistent across all pages */
+  --page-section-padding: clamp(4rem, 8vw, 8rem);
+  --page-section-padding-sm: clamp(3rem, 6vw, 6rem);
+  
+  /* Hero Heights */
+  --page-hero-min-height: 100vh;
+  --page-hero-padding: clamp(6rem, 10vw, 10rem) 0;
+  
+  /* Card Patterns */
+  --page-card-bg: var(--bg-card);
+  --page-card-bg-alt: var(--bg-secondary);
+  --page-card-border: 1px solid var(--border-subtle);
+  --page-card-radius: var(--radius-xl);
+  --page-card-padding: 2rem;
+  --page-card-shadow: var(--abes-shadow-card);
+  --page-card-shadow-hover: var(--abes-shadow-card-hover);
+  
+  /* Section Header Pattern */
+  --page-section-label-color: var(--color-primary);
+  --page-section-title-color: var(--text-primary);
+  --page-section-text-color: var(--text-secondary);
+}
+
+/* ==========================================
+   DARK THEME — Living Hope
+   Derived directly from Opadola Logo
+   Green hand (left), Blue hand (right),
+   Golden heart glow (center)
+   ========================================== */
+
+[data-theme="dark"] {
+  /* ==========================================
+     BACKGROUNDS — Deep Night Sky
+     The canvas before dawn
+     ========================================== */
+  
+  --bg-primary: #0A1215;
+  --bg-secondary: #0E1A1F;
+  --bg-tertiary: #122028;
+  --bg-hero: #0A1215;
+  --bg-footer: #060A0C;
+  --bg-card: #122028;
+  --bg-card-secondary: #0E1A1F;
+  
+  /* ==========================================
+     SURFACES — Layered Darkness
+     ========================================== */
+  
+  --surface-primary: #122028;
+  --surface-secondary: #0E1A1F;
+  --surface-tertiary: #0A1215;
+  --surface-glass: rgba(18, 32, 40, 0.88);
+  --surface-glass-border: rgba(255, 255, 255, 0.05);
+  --surface-elevated: #162A33;
+  
+  /* ==========================================
+     BRAND COLORS — Logo-Derived
+     Exact values from the official mark
+     ========================================== */
+  
+  /* Primary — Logo Left Hand (Teal Green) */
+  --color-primary: #3EBF8A;
+  --color-primary-light: #5FD4A5;
+  --color-primary-dark: #1B7A52;
+  
+  /* Secondary — Logo Right Hand (Steel Blue) */
+  --color-secondary: #4EA8D8;
+  --color-secondary-light: #6DC0E8;
+  --color-secondary-dark: #2980B9;
+  
+  /* Accent — Logo Center Heart (Warm Gold) */
+  --color-accent: #D4A843;
+  --color-accent-light: #E8C46A;
+  --color-accent-dark: #B8922E;
+  
+  /* ==========================================
+     TEXT — Warm Off-Whites
+     ========================================== */
+  
+  --text-primary: #E8F0EC;
+  --text-secondary: #A3BDB5;
+  --text-muted: #5E857C;
+  --text-inverse: #0A1215;
+  --text-link: #3EBF8A;
+  --text-link-hover: #5FD4A5;
+  --text-heading: #E8F0EC;
+  
+  /* ==========================================
+     BORDERS — Ghost Lines
+     ========================================== */
+  
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.08);
+  --border-focus: #3EBF8A;
+  --border-divider: rgba(255, 255, 255, 0.03);
+  --border-card: rgba(255, 255, 255, 0.05);
+  
+  /* ==========================================
+     SHADOWS — Deep, Ambient
+     ========================================== */
+  
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+  
+  --shadow-button: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-button-hover: 0 6px 20px rgba(0, 0, 0, 0.4);
+  
+  /* Colored Shadows — Logo-derived ambient */
+  --shadow-primary: 0 4px 24px rgba(62, 191, 138, 0.10);
+  --shadow-secondary: 0 4px 24px rgba(78, 168, 216, 0.08);
+  --shadow-accent: 0 4px 24px rgba(212, 168, 67, 0.08);
+  
+  /* ==========================================
+     GRADIENTS — Logo-Inspired
+     ========================================== */
+  
+  --gradient-primary: linear-gradient(135deg, #3EBF8A 0%, #1B7A52 100%);
+  --gradient-secondary: linear-gradient(135deg, #4EA8D8 0%, #2980B9 100%);
+  --gradient-brand: linear-gradient(135deg, #1B7A52 0%, #2980B9 100%);
+  --gradient-warm: linear-gradient(135deg, #1B7A52 0%, #D4A843 100%);
+  --gradient-surface: linear-gradient(180deg, #0A1215 0%, #0E1A1F 100%);
+  --gradient-hero: linear-gradient(135deg, #0A1215 0%, #122028 100%);
+  --gradient-footer: linear-gradient(180deg, #060A0C 0%, #040608 100%);
+  
+  /* ==========================================
+     GLOWS — Logo Heart Radiance
+     ========================================== */
+  
+  --glow-primary: 0 0 30px rgba(62, 191, 138, 0.08);
+  --glow-secondary: 0 0 30px rgba(78, 168, 216, 0.06);
+  --glow-accent: 0 0 30px rgba(212, 168, 67, 0.08);
+  --glow-soft: 0 0 60px rgba(62, 191, 138, 0.04);
+  
+  /* ==========================================
+     AMBIENT BLUE ELEVATION SYSTEM (ABES)
+     ========================================== */
+  
+  --abes-blue-50: rgba(41, 128, 185, 0.04);
+  --abes-blue-75: rgba(41, 128, 185, 0.06);
+  --abes-blue-100: rgba(41, 128, 185, 0.08);
+  --abes-blue-125: rgba(41, 128, 185, 0.10);
+  --abes-blue-150: rgba(41, 128, 185, 0.12);
+  --abes-blue-175: rgba(41, 128, 185, 0.15);
+  --abes-blue-200: rgba(41, 128, 185, 0.18);
+  --abes-blue-250: rgba(41, 128, 185, 0.22);
+  
+  --abes-shadow-ambient: 0 8px 40px var(--abes-blue-100);
+  --abes-shadow-ambient-hover: 0 12px 48px var(--abes-blue-175);
+  --abes-shadow-card: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 12px 40px var(--abes-blue-075);
+  --abes-shadow-card-hover: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 16px 48px var(--abes-blue-150);
+  
+  --abes-section-glow: 0 20px 80px var(--abes-blue-060);
+  
+  /* ==========================================
+     INPUTS
+     ========================================== */
+  
+  --input-bg: #0E1A1F;
+  --input-border: rgba(255, 255, 255, 0.06);
+  --input-border-focus: #3EBF8A;
+  --input-text: #E8F0EC;
+  --input-placeholder: #5E857C;
+  
+  /* ==========================================
+     LEGACY ALIASES — Dark Theme
+     ========================================== */
+  
+  --color-white: #122028;
+  --color-ivory: #0E1A1F;
+  --color-black: #0A1215;
+  
+  --heritage-green-50: rgba(62, 191, 138, 0.08);
+  --heritage-green-100: rgba(62, 191, 138, 0.12);
+  --heritage-green-200: rgba(62, 191, 138, 0.18);
+  --heritage-green-300: rgba(62, 191, 138, 0.25);
+  --heritage-green-400: rgba(62, 191, 138, 0.40);
+  --heritage-green-500: #3EBF8A;
+  --heritage-green-600: #2EA87A;
+  --heritage-green-700: #1B7A52;
+  --heritage-green-800: #145C3D;
+  --heritage-green-900: #0E3E2A;
+  
+  --legacy-gold-50: rgba(212, 168, 67, 0.08);
+  --legacy-gold-100: rgba(212, 168, 67, 0.12);
+  --legacy-gold-200: rgba(212, 168, 67, 0.18);
+  --legacy-gold-300: rgba(212, 168, 67, 0.25);
+  --legacy-gold-400: rgba(212, 168, 67, 0.40);
+  --legacy-gold-500: #D4A843;
+  --legacy-gold-600: #C49A38;
+  --legacy-gold-700: #A8832E;
+  --legacy-gold-800: #8C6C24;
+  --legacy-gold-900: #70551A;
+  
+  --border-light: var(--border-subtle);
+  --container-max-width: var(--container-xl);
+  --text-inverse-muted: rgba(10, 18, 21, 0.6);
+  
+  /* Page Design Language — Dark */
+  --page-card-bg: var(--bg-card);
+  --page-card-bg-alt: var(--bg-secondary);
+  
+  /* Primary Scale — Dark Mode Remaps
+     These ensure headings, icons, and labels
+     remain legible on dark backgrounds */
+  --color-primary-50: rgba(62, 191, 138, 0.08);
+  --color-primary-100: rgba(62, 191, 138, 0.14);
+  --color-primary-200: rgba(62, 191, 138, 0.20);
+  --color-primary-300: rgba(62, 191, 138, 0.30);
+  --color-primary-400: #5FD4A5;
+  --color-primary-500: #3EBF8A;
+  --color-primary-600: #2EA87A;
+  --color-primary-700: #5FD4A5;
+  --color-primary-800: #A3BDB5;
+  --color-primary-900: #E8F0EC;
+  --color-primary-950: #F5F9F7;
+  
+  /* Accent Scale — Dark Mode Remaps */
+  --color-accent-50: rgba(212, 168, 67, 0.08);
+  --color-accent-100: rgba(212, 168, 67, 0.14);
+  --color-accent-200: rgba(212, 168, 67, 0.20);
+  --color-accent-300: rgba(212, 168, 67, 0.30);
+  --color-accent-400: #E8C46A;
+  --color-accent-500: #D4A843;
+  --color-accent-600: #E8C46A;
+  --color-accent-700: #D4A843;
+  --color-accent-800: #A3BDB5;
+  --color-accent-900: #E8F0EC;
+  
+  /* ==========================================
+     GLASS MORPHISM — Dark
+     ========================================== */
+
+  --glass-bg: rgba(18, 32, 40, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-blur: blur(20px);
+
+  /* ==========================================
+     INTERACTIVE STATES — Dark
+     ========================================== */
+
+  --interactive-glow: 0 0 20px rgba(62, 191, 138, 0.12);
+  --interactive-glow-strong: 0 0 30px rgba(62, 191, 138, 0.2);
+
+  --header-bg-scrolled: rgba(10, 18, 21, 0.96);
+  
+  /* ==========================================
+     HERO ATMOSPHERE — Logo-Soul System
+     Blue and green shades only
+     ========================================== */
+  
+  /* Logo Green Hand — Left atmospheric glow */
+  --atmo-hand-green: rgba(27, 122, 82, 0.20);
+  --atmo-hand-green-deep: rgba(27, 122, 82, 0.08);
+  
+  /* Logo Blue Hand — Right atmospheric glow */
+  --atmo-hand-blue: rgba(41, 128, 185, 0.16);
+  --atmo-hand-blue-deep: rgba(41, 128, 185, 0.06);
+  
+  /* Heart Center — Blue-green blend */
+  --atmo-heart-green: rgba(62, 191, 138, 0.12);
+  
+  /* Headline Atmospheric Glow */
+  --atmo-headline-glow: rgba(27, 122, 82, 0.14);
+  
+  /* Environmental Blue Reflection */
+  --atmo-env-blue: rgba(41, 128, 185, 0.10);
+  
+  /* Vignette — Focus the eye */
+  --atmo-vignette: rgba(6, 10, 12, 0.65);
+  
+  /* Texture */
+  --atmo-texture-dot: rgba(255, 255, 255, 0.018);
+  
+  /* Motion Preparation Tokens */
+  --hero-bloom-opacity: 1;
+  --hero-bloom-blur: 100px;
+  --hero-bloom-scale: 1;
+  --hero-shape-1-opacity: 0.04;
+  --hero-shape-2-opacity: 0.03;
+  --hero-texture-opacity: 0.02;
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-slower: 0ms;
+  }
+}
