@@ -131,6 +131,11 @@
   aspect-ratio: 3/4;
 }
 
+.team-founder-image-wrapper {
+  position: relative;
+  perspective: 1000px;
+}
+
 .team-founder-image img {
   width: 100%;
   height: 100%;
@@ -138,9 +143,59 @@
   transition: transform 0.7s var(--ease-emphasis), filter 0.5s var(--ease-out);
 }
 
-.team-founder-image:hover img {
+.team-founder-image-wrapper:hover .team-founder-image img {
   transform: scale(1.05);
   filter: brightness(1.04) contrast(1.02);
+}
+
+.team-founder-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(42,125,95,0.2) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.team-founder-image-wrapper:hover .team-founder-image::after {
+  opacity: 1;
+}
+
+/* Founder Social Icons */
+.team-founder-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.team-founder-social-link {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-100);
+  border-radius: var(--radius-full);
+  color: var(--color-primary-700);
+  transition: transform 0.4s var(--ease-spring), background-color 0.3s var(--ease-out), color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.team-founder-social-link:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(42,125,95,0.3);
+}
+
+.team-founder-social-link:active {
+  transform: scale(0.92);
+}
+
+.team-founder-social-link svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Board Section */
@@ -286,11 +341,11 @@
 .team-member-social svg {
   width: 18px;
   height: 18px;
-  stroke: var(--color-white);
+  color: var(--color-white);
 }
 
 .team-member-social:hover svg {
-  stroke: var(--color-primary-700);
+  color: var(--color-primary-700);
 }
 
 .team-member-content {
@@ -596,34 +651,90 @@
     padding: 6rem 0 3rem;
   }
 
+  .team-hero-title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .team-hero-subtitle {
+    font-size: var(--text-base);
+  }
+
   .team-hero-cta {
     flex-direction: column;
     align-items: center;
+  }
+
+  .team-founder-title {
+    font-size: var(--text-h3);
+  }
+
+  .team-founder-role {
+    font-size: var(--text-base);
+  }
+
+  .team-founder-text {
+    font-size: var(--text-sm);
+  }
+
+  .team-founder-image-wrapper {
+    order: -1;
   }
 
   .team-founder-image {
     aspect-ratio: 16/9;
   }
 
+  .team-board-header {
+    margin-bottom: 2rem;
+  }
+
+  .team-board-title {
+    font-size: var(--text-h3);
+  }
+
   .team-board-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
   }
 
   .team-member-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .team-member-image {
-    width: 120px;
-    aspect-ratio: auto;
+    aspect-ratio: 1;
+    width: 100%;
   }
 
   .team-member-content {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .team-member-name {
+    font-size: var(--text-lg);
+  }
+
+  .team-member-title {
+    font-size: var(--text-xs);
+  }
+
+  .team-member-bio {
+    font-size: var(--text-xs);
+  }
+
+  .team-member-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  }
+
+  .team-values-title {
+    font-size: var(--text-h3);
+  }
+
+  .team-cta-title {
+    font-size: var(--text-h3);
   }
 
   .team-cta-buttons {

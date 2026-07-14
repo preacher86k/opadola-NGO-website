@@ -395,35 +395,92 @@ export default function HomePage() {
             <p className="community-subtitle">Every photo tells a story of hope, resilience, and change.</p>
           </div>
 
-          <div className="community-grid">
-            <div className="community-item community-item-wide reveal">
-              <img src="/images/gallery/IMG_1927.JPG" alt="Community outreach distribution event" loading="lazy" />
-              <div className="community-overlay">
-                <span className="community-tag">Outreach</span>
+          <div className="community-carousel-wrap" role="region" aria-label="Community impact carousel" tabIndex={0}>
+            <div className="community-carousel-track">
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1927.JPG" alt="Community outreach distribution event" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Outreach</span>
+                </div>
               </div>
-            </div>
-            <div className="community-item reveal">
-              <img src="/images/gallery/IMG_1928.JPG" alt="Medical outreach providing healthcare" loading="lazy" />
-              <div className="community-overlay">
-                <span className="community-tag">Healthcare</span>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1928.JPG" alt="Medical outreach providing healthcare" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Healthcare</span>
+                </div>
               </div>
-            </div>
-            <div className="community-item reveal">
-              <img src="/images/gallery/IMG_1936.JPG" alt="Youth empowerment program" loading="lazy" />
-              <div className="community-overlay">
-                <span className="community-tag">Empowerment</span>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1936.JPG" alt="Youth empowerment program" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Empowerment</span>
+                </div>
               </div>
-            </div>
-            <div className="community-item reveal">
-              <img src="/images/gallery/IMG_1923.JPG" alt="Volunteers at community event" loading="lazy" />
-              <div className="community-overlay">
-                <span className="community-tag">Volunteers</span>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1923.JPG" alt="Volunteers at community event" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Volunteers</span>
+                </div>
               </div>
-            </div>
-            <div className="community-item community-item-wide reveal">
-              <img src="/images/gallery/IMG_1926.JPG" alt="Community development project" loading="lazy" />
-              <div className="community-overlay">
-                <span className="community-tag">Development</span>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1926.JPG" alt="Community development project" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Development</span>
+                </div>
+              </div>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1774.JPG" alt="Food distribution" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Food Relief</span>
+                </div>
+              </div>
+              <div className="community-carousel-item">
+                <img src="/images/gallery/IMG_1916.JPG" alt="Elderly care" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Elderly Care</span>
+                </div>
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1927.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Outreach</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1928.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Healthcare</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1936.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Empowerment</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1923.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Volunteers</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1926.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Development</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1774.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Food Relief</span>
+                </div>
+              </div>
+              <div className="community-carousel-item" aria-hidden="true">
+                <img src="/images/gallery/IMG_1916.JPG" alt="" loading="lazy" />
+                <div className="community-carousel-overlay">
+                  <span className="community-carousel-tag">Elderly Care</span>
+                </div>
               </div>
             </div>
           </div>
