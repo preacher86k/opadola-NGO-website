@@ -1,33 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { Client } from "pg";
-
-const SESSION_SECRET = process.env.ADMIN_PASSWORD || "opadola-admin-secret";
-
-async function createToken(admin: { id: string; email: string; role: string }): Promise<string> {
-  const payload = JSON.stringify({
-    id: admin.id,
-    email: admin.email,
-    role: admin.role,
-    exp: Date.now() + 24 * 60 * 60 * 1000,
-  });
-  const encoded = btoa(payload);
-
-  const key = await crypto.subtle.importKey(
-    "raw",
-    new TextEncoder().encode(SESSION_SECRET),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
-
-  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(encoded));
-  const signatureHex = Array.from(new Uint8Array(signature))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-
-  return `${encoded}.${signatureHex}`;
-}
+import { createToken } from "@/lib/auth";
 
 async function findAdminByEmail(email: string) {
   const client = new Client({
@@ -70,18 +44,25 @@ export async function POST(request: NextRequest) {
     }
 
     if (!admin) {
-      return NextResponse.json(
-        { success: false, error: "Invalid credentials" },
-        { status: 401 }
-      );
-    }
-
-    const valid = await bcrypt.compare(password, admin.passwordHash);
-    if (!valid) {
-      return NextResponse.json(
-        { success: false, error: "Invalid credentials" },
-        { status: 401 }
-      );
+      // Fallback: check against env vars
+      const envAdminEmail = process.env.ADMIN_EMAIL;
+      const envAdminPassword = process.env.ADMIN_PASSWORD;
+      if (email === envAdminEmail && password === envAdminPassword) {
+        admin = { id: "env-admin", email, name: "Admin", role: "admin" };
+      } else {
+        return NextResponse.json(
+          { success: false, error: "Invalid credentials" },
+          { status: 401 }
+        );
+      }
+    } else {
+      const valid = await bcrypt.compare(password, admin.passwordHash);
+      if (!valid) {
+        return NextResponse.json(
+          { success: false, error: "Invalid credentials" },
+          { status: 401 }
+        );
+      }
     }
 
     const token = await createToken(admin);
