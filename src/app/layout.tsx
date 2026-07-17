@@ -27,6 +27,7 @@ import "@/styles/audio-player.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.opadolacare.org"),
   title: {
     default: "Opadola Care Initiative — Restoring Dignity, Expanding Opportunity",
     template: "%s | Opadola Care Initiative",
