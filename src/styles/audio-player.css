@@ -469,3 +469,13 @@
     display: none;
   }
 }
+
+/* -- Menu Open: hide player when mobile nav is active -- */
+[data-menu-open="true"] .lh-dock,
+[data-menu-open="true"] .lh-collapsed,
+[data-menu-open="true"] .lh-prep-panel {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}

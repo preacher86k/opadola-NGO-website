@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const PRESET_AMOUNTS = [5000, 10000, 25000, 50000, 100000];
+const PRESET_AMOUNTS = [25000, 50000, 100000, 200000, 500000];
 
 export default function DonationForm() {
   const [selectedAmount, setSelectedAmount] = useState(25000);

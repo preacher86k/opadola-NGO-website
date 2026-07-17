@@ -87,7 +87,7 @@ export default function DonatePage() {
               <div className="dt-impact-visual">
                 <img src="/images/gallery/IMG_1914.JPG" alt="Medical outreach providing care to seniors" />
                 <div className="dt-impact-amount">
-                  <span className="dt-impact-currency">₦</span>5,000
+                  <span className="dt-impact-currency">₦</span>25,000
                 </div>
               </div>
               <div className="dt-impact-body">
@@ -105,7 +105,7 @@ export default function DonatePage() {
               <div className="dt-impact-visual">
                 <img src="/images/gallery/IMG_1936.JPG" alt="Children receiving educational support" />
                 <div className="dt-impact-amount">
-                  <span className="dt-impact-currency">₦</span>25,000
+                  <span className="dt-impact-currency">₦</span>50,000
                 </div>
               </div>
               <div className="dt-impact-body">
@@ -123,7 +123,7 @@ export default function DonatePage() {
               <div className="dt-impact-visual">
                 <img src="/images/gallery/IMG_1926.JPG" alt="Food relief distribution to families" />
                 <div className="dt-impact-amount">
-                  <span className="dt-impact-currency">₦</span>50,000
+                  <span className="dt-impact-currency">₦</span>100,000
                 </div>
               </div>
               <div className="dt-impact-body">
@@ -141,7 +141,7 @@ export default function DonatePage() {
               <div className="dt-impact-visual">
                 <img src="/images/gallery/IMG_1927.JPG" alt="Community outreach event serving 100+ people" />
                 <div className="dt-impact-amount">
-                  <span className="dt-impact-currency">₦</span>100,000
+                  <span className="dt-impact-currency">₦</span>200,000
                 </div>
               </div>
               <div className="dt-impact-body">
@@ -220,115 +220,6 @@ export default function DonatePage() {
         </div>
       </section>
 
-      {/* 5. DONATION TIERS — Pricing Cards */}
-      <section className="dt-tiers" aria-label="Donation tiers">
-        <div className="dt-tiers-inner">
-          <div className="dt-tiers-header">
-            <span className="dt-tiers-label">Giving Circles</span>
-            <h2 className="dt-tiers-title">Choose Your Level of Impact</h2>
-            <p className="dt-tiers-text">Each tier represents a deeper commitment to restoring lives. Pick the one that resonates with your heart.</p>
-          </div>
-
-          <div className="dt-tiers-grid">
-            {/* Tier 1 */}
-            <div className="dt-tier">
-              <div className="dt-tier-header">
-                <span className="dt-tier-name">Compassion Circle</span>
-                <div className="dt-tier-amount">
-                  <span className="dt-tier-currency">₦</span>5,000
-                  <span className="dt-tier-period">/one-time</span>
-                </div>
-                <p className="dt-tier-desc">Provide medical supplies for seniors in need</p>
-              </div>
-              <div className="dt-tier-body">
-                <ul className="dt-tier-features">
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Medications for 10 seniors
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Health screening supplies
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Donation receipt
-                  </li>
-                </ul>
-                <a href="#give" className="dt-tier-btn">Give ₦5,000</a>
-              </div>
-            </div>
-
-            {/* Tier 2 */}
-            <div className="dt-tier dt-tier-featured">
-              <div className="dt-tier-badge">Most Popular</div>
-              <div className="dt-tier-header">
-                <span className="dt-tier-name">Hope Circle</span>
-                <div className="dt-tier-amount">
-                  <span className="dt-tier-currency">₦</span>25,000
-                  <span className="dt-tier-period">/one-time</span>
-                </div>
-                <p className="dt-tier-desc">Educate 5 children for an entire school term</p>
-              </div>
-              <div className="dt-tier-body">
-                <ul className="dt-tier-features">
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    School supplies for 5 children
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Learning materials & uniforms
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Personal thank-you letter
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Impact update report
-                  </li>
-                </ul>
-                <a href="#give" className="dt-tier-btn dt-tier-btn-featured">Give ₦25,000</a>
-              </div>
-            </div>
-
-            {/* Tier 3 */}
-            <div className="dt-tier">
-              <div className="dt-tier-header">
-                <span className="dt-tier-name">Dignity Circle</span>
-                <div className="dt-tier-amount">
-                  <span className="dt-tier-currency">₦</span>100,000
-                  <span className="dt-tier-period">/one-time</span>
-                </div>
-                <p className="dt-tier-desc">Sponsor a full community outreach event</p>
-              </div>
-              <div className="dt-tier-body">
-                <ul className="dt-tier-features">
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    100+ people served
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Named event sponsor
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Photo & video report
-                  </li>
-                  <li className="dt-tier-feature">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 6L9 17l-5-5"></path></svg>
-                    Personal call with our team
-                  </li>
-                </ul>
-                <a href="#give" className="dt-tier-btn">Give ₦100,000</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 6. TESTIMONIAL — Full Width Quote */}
       <section className="dt-testimonial" aria-label="Testimonial">
         <div className="dt-testimonial-media">
@@ -359,7 +250,7 @@ export default function DonatePage() {
           <div className="dt-bank-card">
             <div className="dt-bank-detail">
               <span className="dt-bank-key">Bank Name</span>
-              <span className="dt-bank-value">Wema Bank</span>
+              <span className="dt-bank-value">Polaris Bank</span>
             </div>
             <div className="dt-bank-detail">
               <span className="dt-bank-key">Account Name</span>
@@ -367,13 +258,9 @@ export default function DonatePage() {
             </div>
             <div className="dt-bank-detail">
               <span className="dt-bank-key">Account Number</span>
-              <span className="dt-bank-value dt-bank-copy" data-copy="0231456789">0231456789
+              <span className="dt-bank-value dt-bank-copy" data-copy="4092082448">4092082448
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </span>
-            </div>
-            <div className="dt-bank-detail">
-              <span className="dt-bank-key">Sort Code</span>
-              <span className="dt-bank-value">035</span>
             </div>
           </div>
 

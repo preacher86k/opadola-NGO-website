@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let lastScroll = 0;
@@ -39,11 +40,63 @@ export default function Header() {
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.setAttribute("data-menu-open", "true");
     } else {
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-menu-open");
+      setActiveSubmenu(null);
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-menu-open");
+    };
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (activeSubmenu) {
+          setActiveSubmenu(null);
+        } else {
+          setMenuOpen(false);
+        }
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [menuOpen, activeSubmenu]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const panel = document.querySelector(".mobile-nav-panel");
+    if (!panel) return;
+    const focusableEls = panel.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusableEls.length === 0) return;
+    const first = focusableEls[0];
+    const last = focusableEls[focusableEls.length - 1];
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handler);
+    setTimeout(() => closeBtnRef.current?.focus(), 100);
+    return () => document.removeEventListener("keydown", handler);
+  }, [menuOpen, activeSubmenu]);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    setActiveSubmenu(null);
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -63,14 +116,14 @@ export default function Header() {
           <nav className="nav" role="navigation" aria-label="Main navigation">
             <div className="nav-links">
               <Link href="/" className={`nav-link ${isActive("/") ? "active" : ""}`}>Home</Link>
-              <div className="nav-dropdown" onMouseEnter={() => setActiveDropdown("about")} onMouseLeave={() => setActiveDropdown(null)}>
+              <div className="nav-dropdown" onMouseEnter={() => setActiveSubmenu("about")} onMouseLeave={() => setActiveSubmenu(null)}>
                 <Link href="/about" className={`nav-link ${isActive("/about") ? "active" : ""}`}>About Us</Link>
                 <div className="nav-dropdown-menu">
                   <Link href="/team" className="nav-dropdown-link">Team</Link>
                   <Link href="/events" className="nav-dropdown-link">Events</Link>
                 </div>
               </div>
-              <div className="nav-dropdown" onMouseEnter={() => setActiveDropdown("programs")} onMouseLeave={() => setActiveDropdown(null)}>
+              <div className="nav-dropdown" onMouseEnter={() => setActiveSubmenu("programs")} onMouseLeave={() => setActiveSubmenu(null)}>
                 <Link href="/programs" className={`nav-link ${pathname?.startsWith("/programs") ? "active" : ""}`}>Programs</Link>
                 <div className="nav-dropdown-menu">
                   <Link href="/volunteer" className="nav-dropdown-link">Volunteer</Link>
@@ -109,40 +162,83 @@ export default function Header() {
           </div>
         </div>
 
-        <div className={`mobile-nav ${menuOpen ? "menu-active" : ""}`} role="navigation" aria-label="Mobile navigation">
-          <div className="mobile-nav-bg" aria-hidden="true" />
-          <div className="mobile-nav-inner">
-            <div className="mobile-nav-links">
-              <Link href="/" className="mobile-nav-link" data-nav="0" onClick={() => setMenuOpen(false)}>Home</Link>
-              <div className="mobile-nav-dropdown">
-                <Link href="/about" className="mobile-nav-link" data-nav="1" onClick={() => setMenuOpen(false)}>About Us</Link>
-                <button className="mobile-nav-dropdown-toggle" aria-label="Toggle submenu" aria-expanded={activeDropdown === "about-mobile"} onClick={() => setActiveDropdown(activeDropdown === "about-mobile" ? null : "about-mobile")}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg>
-                </button>
+        <div className={`mobile-nav ${menuOpen ? "menu-active" : ""}`} role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <div className="mobile-nav-bg" aria-hidden="true" onClick={closeMenu} />
+          <div className="mobile-nav-panel">
+            <div className="mobile-nav-header">
+              <div className="mobile-nav-header-left">
+                <img src="/images/logo.gif" alt="" className="mobile-nav-logo" />
+                <span className="mobile-nav-heading">
+                  {activeSubmenu === "about" ? "About Us" : activeSubmenu === "programs" ? "Programs" : "Menu"}
+                </span>
               </div>
-              <div className={`mobile-nav-submenu ${activeDropdown === "about-mobile" ? "active" : ""}`}>
-                <Link href="/team" className="mobile-nav-sublink" onClick={() => setMenuOpen(false)}>Team</Link>
-                <Link href="/events" className="mobile-nav-sublink" onClick={() => setMenuOpen(false)}>Events</Link>
+              <button
+                className="mobile-nav-header-btn"
+                onClick={() => activeSubmenu ? setActiveSubmenu(null) : closeMenu()}
+                aria-label={activeSubmenu ? "Back to main menu" : "Close menu"}
+                ref={closeBtnRef}
+              >
+                {activeSubmenu ? (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="22" height="22">
+                    <path d="M19 12H5" /><path d="M12 19l-7-7 7-7" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="22" height="22">
+                    <path d="M18 6 6 18" /><path d="M6 6 18 18" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            <div className="mobile-nav-screens">
+              <div className={`mobile-nav-screen ${!activeSubmenu ? "mobile-nav-screen-active" : "mobile-nav-screen-exit"}`}>
+                <div className="mobile-nav-links">
+                  <Link href="/" className="mobile-nav-link" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>Home</Link>
+                  <div className="mobile-nav-group-row">
+                    <Link href="/about" className="mobile-nav-group-link" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>About Us</Link>
+                    <button className="mobile-nav-group-chevron" onClick={() => setActiveSubmenu("about")} tabIndex={menuOpen ? 0 : -1} aria-label="About Us submenu">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="mobile-nav-group-row">
+                    <Link href="/programs" className="mobile-nav-group-link" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>Programs</Link>
+                    <button className="mobile-nav-group-chevron" onClick={() => setActiveSubmenu("programs")} tabIndex={menuOpen ? 0 : -1} aria-label="Programs submenu">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                  <Link href="/gallery" className="mobile-nav-link" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>Gallery</Link>
+                  <Link href="/contact" className="mobile-nav-link" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>Contact</Link>
+                </div>
               </div>
-              <div className="mobile-nav-dropdown">
-                <Link href="/programs" className="mobile-nav-link" data-nav="2" onClick={() => setMenuOpen(false)}>Programs</Link>
-                <button className="mobile-nav-dropdown-toggle" aria-label="Toggle submenu" aria-expanded={activeDropdown === "programs-mobile"} onClick={() => setActiveDropdown(activeDropdown === "programs-mobile" ? null : "programs-mobile")}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg>
-                </button>
+
+              <div className={`mobile-nav-screen ${activeSubmenu === "about" ? "mobile-nav-screen-active" : "mobile-nav-screen-exit"}`}>
+                <div className="mobile-nav-sublinks">
+                  <p className="mobile-nav-sub-desc">Learn more about our mission and team.</p>
+                  <Link href="/team" className="mobile-nav-sublink" onClick={closeMenu} tabIndex={activeSubmenu === "about" ? 0 : -1}>Our Team</Link>
+                  <Link href="/events" className="mobile-nav-sublink" onClick={closeMenu} tabIndex={activeSubmenu === "about" ? 0 : -1}>Events &amp; Impact</Link>
+                </div>
               </div>
-              <div className={`mobile-nav-submenu ${activeDropdown === "programs-mobile" ? "active" : ""}`}>
-                <Link href="/volunteer" className="mobile-nav-sublink" onClick={() => setMenuOpen(false)}>Volunteer</Link>
+
+              <div className={`mobile-nav-screen ${activeSubmenu === "programs" ? "mobile-nav-screen-active" : "mobile-nav-screen-exit"}`}>
+                <div className="mobile-nav-sublinks">
+                  <p className="mobile-nav-sub-desc">Explore our programs and how to get involved.</p>
+                  <Link href="/volunteer" className="mobile-nav-sublink" onClick={closeMenu} tabIndex={activeSubmenu === "programs" ? 0 : -1}>Volunteer</Link>
+                </div>
               </div>
-              <Link href="/gallery" className="mobile-nav-link" data-nav="3" onClick={() => setMenuOpen(false)}>Gallery</Link>
-              <Link href="/contact" className="mobile-nav-link" data-nav="4" onClick={() => setMenuOpen(false)}>Contact</Link>
             </div>
 
             <div className="mobile-nav-bottom">
-              <div className="mobile-nav-actions">
-                <Link href="/donate" className="mobile-nav-donate" onClick={() => setMenuOpen(false)}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width={18} height={18}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-                  Donate Now
-                </Link>
+              <Link href="/donate" className="mobile-nav-donate" onClick={closeMenu}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width={18} height={18}>
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                Donate Now
+              </Link>
+              <div className="mobile-nav-footer-row">
                 <button className="mobile-nav-theme" aria-label="Toggle dark mode" type="button" onClick={() => {
                   const current = document.documentElement.getAttribute("data-theme");
                   const next = current === "dark" ? "light" : "dark";
@@ -157,14 +253,14 @@ export default function Header() {
                   </svg>
                   <span className="mobile-nav-theme-label">Dark Mode</span>
                 </button>
-              </div>
-              <div className="mobile-nav-social">
-                <a href="https://x.com/opadolaci" className="mobile-nav-social-link" aria-label="X/Twitter" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width={18} height={18}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-                <a href="#" className="mobile-nav-social-link" aria-label="Instagram" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width={18} height={18}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
-                </a>
+                <div className="mobile-nav-social">
+                  <a href="https://x.com/opadolaci" className="mobile-nav-social-link" aria-label="X/Twitter" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width={18} height={18}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                  </a>
+                  <a href="#" className="mobile-nav-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width={18} height={18}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
+                  </a>
+                </div>
               </div>
               <p className="mobile-nav-contact">+234 916 387 6000 · info@opadola.org</p>
             </div>

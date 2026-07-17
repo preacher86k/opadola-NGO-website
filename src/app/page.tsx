@@ -80,7 +80,7 @@ export default function HomePage() {
             <div className="hero-visual reveal-right">
               <div className="hero-image-wrapper">
                 <img
-                  src="/images/gallery/IMG_1923.JPG"
+                  src="/images/gallery/IMG_1939.JPG"
                   alt="Opadola Care Initiative community outreach program"
                   loading="eager"
                   className="hero-image"
@@ -188,7 +188,7 @@ export default function HomePage() {
           <div className="programs-grid">
             <article className="program-card reveal">
               <div className="program-card-image">
-                <img src="/images/gallery/IMG_1936.JPG" alt="Education and empowerment programs" loading="lazy" />
+                <img src="/images/gallery/IMG_1941.JPG" alt="Education and empowerment programs" loading="lazy" />
               </div>
               <div className="program-card-content">
                 <div className="program-card-icon">
@@ -211,7 +211,7 @@ export default function HomePage() {
 
             <article className="program-card reveal">
               <div className="program-card-image">
-                <img src="/images/gallery/IMG_1928.JPG" alt="Medical outreach providing care" loading="lazy" />
+                <img src="/images/gallery/IMG_1780.JPG" alt="Medical outreach providing care" loading="lazy" />
               </div>
               <div className="program-card-content">
                 <div className="program-card-icon">
@@ -233,7 +233,7 @@ export default function HomePage() {
 
             <article className="program-card reveal">
               <div className="program-card-image">
-                <img src="/images/gallery/IMG_1923.JPG" alt="Community support distribution" loading="lazy" />
+                <img src="/images/gallery/IMG_1295.jpg" alt="Community support distribution" loading="lazy" />
               </div>
               <div className="program-card-content">
                 <div className="program-card-icon">
@@ -258,7 +258,7 @@ export default function HomePage() {
 
             <article className="program-card reveal">
               <div className="program-card-image">
-                <img src="/images/gallery/IMG_1939.JPG" alt="Community development" loading="lazy" />
+                <img src="/images/gallery/IMG_1083%20copy.jpg" alt="Community development" loading="lazy" />
               </div>
               <div className="program-card-content">
                 <div className="program-card-icon">

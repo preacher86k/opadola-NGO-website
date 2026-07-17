@@ -28,7 +28,7 @@ export default async function TeamPage() {
       {/* Founder Section */}
       <section id="founder" className="team-founder">
         <div className="team-founder-grid">
-          <div className="team-founder-content" data-animate="slide-right">
+          <div className="team-founder-content reveal-right">
             <span className="team-founder-label">Founder</span>
             <h2 className="team-founder-title">Kayode Olufemi O.</h2>
             <p className="team-founder-role">Founder & Executive Director</p>
@@ -48,7 +48,7 @@ export default async function TeamPage() {
             </div>
           </div>
 
-          <div className="team-founder-image-wrapper" data-animate="slide-left">
+          <div className="team-founder-image-wrapper reveal-left">
             <div className="team-founder-image">
               <img src="/images/team/ceo.JPG" alt="Kayode Olufemi O." loading="lazy" />
             </div>
@@ -66,8 +66,8 @@ export default async function TeamPage() {
           </p>
         </div>
 
-        <div className="team-board-grid">
-          <div className="team-member-card team-member-card-reveal" data-animate="stagger">
+        <div className="team-board-grid stagger-children">
+          <div className="team-member-card team-member-card-reveal">
             <div className="team-member-image">
               <img src="/images/team/joy2.JPG" alt="Afolashade Joy Jubrilla" loading="lazy" />
               <div className="team-member-overlay">
@@ -83,7 +83,7 @@ export default async function TeamPage() {
             </div>
           </div>
 
-          <div className="team-member-card" data-animate="stagger">
+          <div className="team-member-card">
             <div className="team-member-image">
               <img src="/images/team/adaobi.JPG" alt="Adaobi Umo-Etuk" loading="lazy" />
               <div className="team-member-overlay">
@@ -99,7 +99,7 @@ export default async function TeamPage() {
             </div>
           </div>
 
-          <div className="team-member-card" data-animate="stagger">
+          <div className="team-member-card">
             <div className="team-member-image">
               <img src="/images/team/adesanya.JPG" alt="Adesanya Oluwasegun Emmanuel" loading="lazy" />
               <div className="team-member-overlay">
@@ -115,7 +115,7 @@ export default async function TeamPage() {
             </div>
           </div>
 
-          <div className="team-member-card" data-animate="stagger">
+          <div className="team-member-card">
             <div className="team-member-image">
               <img src="/images/team/michael pedro.JPG" alt="Michael Pedro" loading="lazy" />
               <div className="team-member-overlay">
@@ -163,8 +163,8 @@ export default async function TeamPage() {
           </p>
         </div>
 
-        <div className="team-values-grid">
-          <div className="team-value-card" data-animate="stagger">
+        <div className="team-values-grid stagger-children">
+          <div className="team-value-card">
             <div className="team-value-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -174,7 +174,7 @@ export default async function TeamPage() {
             <p className="team-value-text">We are driven by a deep commitment to making a difference in the lives of vulnerable individuals.</p>
           </div>
 
-          <div className="team-value-card" data-animate="stagger">
+          <div className="team-value-card">
             <div className="team-value-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -187,7 +187,7 @@ export default async function TeamPage() {
             <p className="team-value-text">We work together as a team and with communities to create sustainable solutions.</p>
           </div>
 
-          <div className="team-value-card" data-animate="stagger">
+          <div className="team-value-card">
             <div className="team-value-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>

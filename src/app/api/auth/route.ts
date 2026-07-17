@@ -6,7 +6,7 @@ import { createToken } from "@/lib/auth";
 async function findAdminByEmail(email: string) {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 8000,
+    connectionTimeoutMillis: 2000,
   });
 
   try {
@@ -36,11 +36,7 @@ export async function POST(request: NextRequest) {
     try {
       admin = await findAdminByEmail(email);
     } catch (dbError) {
-      console.error("DB connection error:", dbError);
-      return NextResponse.json(
-        { success: false, error: "Database unavailable. Please try again." },
-        { status: 503 }
-      );
+      console.error("DB connection error, falling back to env vars:", dbError);
     }
 
     if (!admin) {
