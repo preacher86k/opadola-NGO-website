@@ -1,131 +1,114 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import InfiniteGallery from "@/components/ui/InfiniteGallery";
 
-const STATIC_ITEMS = [
-  { src: "/images/gallery/IMG_1920.JPG", alt: "Education outreach", category: "programs", title: "Education Outreach" },
-  { src: "/images/gallery/IMG_1928.JPG", alt: "Medical outreach", category: "programs", title: "Medical Outreach" },
-  { src: "/images/gallery/IMG_1774.JPG", alt: "Food distribution", category: "events", title: "Food Distribution" },
-  { src: "/images/gallery/IMG_1775.JPG", alt: "Community meeting", category: "community", title: "Community Meeting" },
-  { src: "/images/gallery/IMG_1916.JPG", alt: "Elderly care", category: "programs", title: "Elderly Care Program" },
-  { src: "/images/gallery/IMG_1939.JPG", alt: "Educational support", category: "events", title: "Educational Support" },
-  { src: "/images/gallery/IMG_1921.JPG", alt: "Volunteer team", category: "team", title: "Volunteer Team" },
-  { src: "/images/gallery/IMG_1926.JPG", alt: "Partnership meeting", category: "community", title: "Partnership Meeting" },
-  { src: "/images/gallery/IMG_1923.JPG", alt: "Community outreach", category: "community", title: "Community Outreach" },
-  { src: "/images/gallery/IMG_1936.JPG", alt: "Youth empowerment", category: "team", title: "Youth Empowerment" },
-  { src: "/images/gallery/vounteer3.png", alt: "Field team", category: "team", title: "Field Team" },
+const ALL_IMAGES = [
+  "IMG_1771.JPG", "IMG_1772.JPG", "IMG_1773.JPG", "IMG_1774.JPG", "IMG_1775.JPG",
+  "IMG_1778.JPG", "IMG_1779.JPG", "IMG_1780.JPG", "IMG_1781.JPG", "IMG_1783.JPG",
+  "IMG_1914.JPG", "IMG_1915.JPG", "IMG_1916.JPG", "IMG_1917.JPG", "IMG_1918.JPG",
+  "IMG_1919.JPG", "IMG_1920.JPG", "IMG_1921.JPG", "IMG_1922.JPG", "IMG_1923.JPG",
+  "IMG_1925.JPG", "IMG_1926.JPG", "IMG_1927.JPG", "IMG_1928.JPG",
+  "IMG_1936.JPG", "IMG_1939.JPG", "IMG_1941.JPG", "IMG_1942.JPG", "IMG_1943.JPG", "IMG_1944.JPG",
+  "IMG_1295.jpg", "IMG_1083 copy.jpg",
+  "vounteer1.png", "vounteer2.png", "vounteer3.png", "vounteer4.png",
+  "volunteer5.PNG", "volunteer6.PNG",
 ];
 
-const ALBUM_ITEMS = [
-  { src: "/images/gallery/IMG_1928.JPG", alt: "Medical Outreach 2026", title: "Medical Outreach 2026", count: 24, desc: "Free healthcare for senior citizens" },
-  { src: "/images/gallery/IMG_1939.JPG", alt: "Educational Support Initiative", title: "Educational Support Initiative", count: 18, desc: "Bridging the digital divide" },
-  { src: "/images/gallery/IMG_1927.JPG", alt: "Community Events", title: "Community Events", count: 32, desc: "Engaging with communities" },
-];
+const GALLERY_ITEMS = ALL_IMAGES.map((file, i) => ({
+  src: `/images/gallery/${file}`,
+  alt: `Gallery image ${i + 1}`,
+  title: `Gallery ${i + 1}`,
+}));
 
 export default function GalleryPage() {
+  const [lightboxActive, setLightboxActive] = useState(false);
+  const [lightboxIdx, setLightboxIdx] = useState(0);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+
+  const updateLightbox = useCallback((index: number) => {
+    const items = GALLERY_ITEMS;
+    const item = items[index];
+    if (!item) return;
+    const lightbox = lightboxRef.current;
+    if (!lightbox) return;
+    const img = lightbox.querySelector<HTMLImageElement>(".gallery-lightbox-img");
+    const titleEl = lightbox.querySelector<HTMLElement>(".gallery-lightbox-title");
+    if (img) img.src = item.src;
+    if (img) img.alt = item.alt;
+    if (titleEl) titleEl.textContent = item.title;
+    setLightboxIdx(index);
+  }, []);
+
+  const openLightbox = useCallback((index: number) => {
+    updateLightbox(index);
+    setLightboxActive(true);
+    document.body.style.overflow = "hidden";
+  }, [updateLightbox]);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxActive(false);
+    document.body.style.overflow = "";
+  }, []);
+
+  const goPrev = useCallback(() => {
+    const prev = (lightboxIdx - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+    updateLightbox(prev);
+  }, [lightboxIdx, updateLightbox]);
+
+  const goNext = useCallback(() => {
+    const next = (lightboxIdx + 1) % GALLERY_ITEMS.length;
+    updateLightbox(next);
+  }, [lightboxIdx, updateLightbox]);
+
+  const handleImageClick = useCallback((idx: number) => {
+    openLightbox(idx);
+  }, [openLightbox]);
+
   useEffect(() => {
-    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".gallery-filter-btn");
-    const items = document.querySelectorAll<HTMLElement>(".gallery-item");
-    const lightbox = document.querySelector<HTMLElement>(".gallery-lightbox");
-    const lightboxImg = lightbox?.querySelector<HTMLImageElement>(".gallery-lightbox-img");
-    const lightboxTitle = lightbox?.querySelector<HTMLElement>(".gallery-lightbox-title");
-    const lightboxMeta = lightbox?.querySelector<HTMLElement>(".gallery-lightbox-meta");
-    const lightboxClose = lightbox?.querySelector<HTMLElement>(".gallery-lightbox-close");
-    const lightboxPrev = lightbox?.querySelector<HTMLElement>(".gallery-lightbox-prev");
-    const lightboxNext = lightbox?.querySelector<HTMLElement>(".gallery-lightbox-next");
+    const lightbox = lightboxRef.current;
+    if (!lightbox) return;
 
-    let currentIndex = 0;
-    let imageItems: HTMLElement[] = [];
+    const closeBtn = lightbox.querySelector<HTMLElement>(".gallery-lightbox-close");
+    const prevBtn = lightbox.querySelector<HTMLElement>(".gallery-lightbox-prev");
+    const nextBtn = lightbox.querySelector<HTMLElement>(".gallery-lightbox-next");
 
-    const updateLightbox = (index: number) => {
-      const item = imageItems[index];
-      if (!item) return;
-      const img = item.querySelector<HTMLImageElement>("img");
-      const titleEl = item.querySelector<HTMLElement>(".gallery-item-title");
-      const catEl = item.querySelector<HTMLElement>(".gallery-item-category");
-      if (lightboxImg && img) lightboxImg.src = img.src;
-      if (lightboxImg && img) lightboxImg.alt = img.alt;
-      if (lightboxTitle) lightboxTitle.textContent = titleEl?.textContent || "";
-      if (lightboxMeta) lightboxMeta.textContent = catEl?.textContent || "";
-      currentIndex = index;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!lightbox.classList.contains("active")) return;
+      if (e.key === "Escape") { closeLightbox(); }
+      if (e.key === "ArrowLeft") { goPrev(); }
+      if (e.key === "ArrowRight") { goNext(); }
     };
 
-    filterBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        filterBtns.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const filter = btn.getAttribute("data-filter") || "all";
-        items.forEach((item) => {
-          if (filter === "all" || item.getAttribute("data-category") === filter) {
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        });
-      });
-    });
+    const onBackdrop = (e: MouseEvent) => {
+      if (e.target === lightbox) closeLightbox();
+    };
 
-    items.forEach((item, i) => {
-      imageItems.push(item);
-      const expandBtn = item.querySelector<HTMLElement>(".gallery-item-btn");
-      const openLightbox = () => {
-        imageItems = Array.from(document.querySelectorAll<HTMLElement>(".gallery-item:not(.hidden)"));
-        const visibleIndex = imageItems.indexOf(item);
-        if (visibleIndex !== -1) {
-          updateLightbox(visibleIndex);
-          lightbox?.classList.add("active");
-          document.body.style.overflow = "hidden";
-        }
-      };
-      item.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement).closest(".gallery-item-btn")) return;
-        openLightbox();
-      });
-      expandBtn?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openLightbox();
-      });
-    });
+    closeBtn?.addEventListener("click", closeLightbox);
+    prevBtn?.addEventListener("click", goPrev);
+    nextBtn?.addEventListener("click", goNext);
+    document.addEventListener("keydown", onKeyDown);
+    lightbox.addEventListener("click", onBackdrop);
 
-    lightboxClose?.addEventListener("click", () => {
-      lightbox?.classList.remove("active");
-      document.body.style.overflow = "";
-    });
+    return () => {
+      closeBtn?.removeEventListener("click", closeLightbox);
+      prevBtn?.removeEventListener("click", goPrev);
+      nextBtn?.removeEventListener("click", goNext);
+      document.removeEventListener("keydown", onKeyDown);
+      lightbox.removeEventListener("click", onBackdrop);
+    };
+  }, [closeLightbox, goPrev, goNext]);
 
-    lightbox?.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (!lightbox?.classList.contains("active")) return;
-      if (e.key === "Escape") {
-        lightbox.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-      if (e.key === "ArrowLeft") {
-        const prev = (currentIndex - 1 + imageItems.length) % imageItems.length;
-        updateLightbox(prev);
-      }
-      if (e.key === "ArrowRight") {
-        const next = (currentIndex + 1) % imageItems.length;
-        updateLightbox(next);
-      }
-    });
-
-    lightboxPrev?.addEventListener("click", () => {
-      const prev = (currentIndex - 1 + imageItems.length) % imageItems.length;
-      updateLightbox(prev);
-    });
-
-    lightboxNext?.addEventListener("click", () => {
-      const next = (currentIndex + 1) % imageItems.length;
-      updateLightbox(next);
-    });
-  }, []);
+  useEffect(() => {
+    const lightbox = lightboxRef.current;
+    if (!lightbox) return;
+    if (lightboxActive) {
+      lightbox.classList.add("active");
+    } else {
+      lightbox.classList.remove("active");
+    }
+  }, [lightboxActive]);
 
   return (
     <>
@@ -146,7 +129,6 @@ export default function GalleryPage() {
           <p className="gallery-hero-subtitle">Every photograph tells a story of hope, dignity, and lasting change across Nigerian communities.</p>
           <div className="gallery-hero-cta">
             <a href="#gallery" className="btn btn-white btn-lg">Explore Gallery</a>
-            <a href="#albums" className="btn btn-ghost btn-lg">View Albums</a>
           </div>
         </div>
       </section>
@@ -174,80 +156,23 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* 3. FILTERS */}
-      <section className="gallery-filters" id="gallery">
-        <div className="gallery-filters-inner">
-          <button className="gallery-filter-btn active" data-filter="all" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            All Photos
-          </button>
-          <button className="gallery-filter-btn" data-filter="programs" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Programs
-          </button>
-          <button className="gallery-filter-btn" data-filter="events" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 9H3"/><path d="M9 21V9"/></svg>
-            Events
-          </button>
-          <button className="gallery-filter-btn" data-filter="community" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Community
-          </button>
-          <button className="gallery-filter-btn" data-filter="team" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Team
-          </button>
-        </div>
+      {/* 3. INFINITE GALLERY */}
+      <section className="gallery-infinite" id="gallery">
+        <InfiniteGallery
+          images={GALLERY_ITEMS}
+          density={5}
+          imageWidth={150}
+          imageHeight={150}
+          rounded={3}
+          dragSpeed={20}
+          driftAmount={8}
+          friction={10}
+          backgroundColor="#0A1215"
+          onImageClick={handleImageClick}
+        />
       </section>
 
-      {/* 4. GALLERY GRID */}
-      <section className="gallery-grid">
-        <div className="gallery-grid-inner">
-          <div className="gallery-masonry">
-            {STATIC_ITEMS.map((item, i) => (
-              <div className="gallery-item" data-category={item.category} key={i}>
-                <img src={item.src} alt={item.alt} loading="lazy" />
-                <div className="gallery-item-glow" aria-hidden="true"></div>
-                <div className="gallery-item-overlay">
-                  <span className="gallery-item-category">{item.category.charAt(0).toUpperCase() + item.category.slice(1)}</span>
-                  <h3 className="gallery-item-title">{item.title}</h3>
-                </div>
-                <button className="gallery-item-btn" aria-label="View full image" type="button">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
-                </button>
-                <span className="gallery-item-badge">2026</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. ALBUMS */}
-      <section id="albums" className="gallery-albums">
-        <div className="gallery-albums-header">
-          <span className="gallery-albums-label">Collections</span>
-          <h2 className="gallery-albums-title">Browse by Album</h2>
-          <p className="gallery-albums-text">Curated collections from our programs, events, and community outreach.</p>
-        </div>
-        <div className="gallery-albums-grid">
-          {ALBUM_ITEMS.map((album, i) => (
-            <div className="gallery-album-card" key={i}>
-              <img src={album.src} alt={album.alt} loading="lazy" />
-              <div className="gallery-album-overlay"></div>
-              <div className="gallery-album-content">
-                <span className="gallery-album-count">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                  {album.count} Photos
-                </span>
-                <h3 className="gallery-album-title">{album.title}</h3>
-                <p className="gallery-album-desc">{album.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. CTA */}
+      {/* 4. CTA */}
       <section className="gallery-cta">
         <div className="gallery-cta-inner">
           <div className="gallery-cta-header">
@@ -293,8 +218,14 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* 7. LIGHTBOX */}
-      <div className="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+      {/* 5. LIGHTBOX */}
+      <div
+        ref={lightboxRef}
+        className="gallery-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image lightbox"
+      >
         <button className="gallery-lightbox-close" aria-label="Close lightbox" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
@@ -305,7 +236,6 @@ export default function GalleryPage() {
           <img alt="" className="gallery-lightbox-img" />
           <div className="gallery-lightbox-info">
             <p className="gallery-lightbox-title"></p>
-            <p className="gallery-lightbox-meta"></p>
           </div>
         </div>
         <button className="gallery-lightbox-nav gallery-lightbox-next" aria-label="Next image" type="button">

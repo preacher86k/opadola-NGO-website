@@ -106,7 +106,7 @@ export default function Header() {
       <header className="header" role="banner">
         <div className="header-inner">
           <Link href="/" className="logo" aria-label="Opadola Care Initiative - Home">
-            <img src="/images/logo.gif" alt="" className="logo-img" width={44} height={44} />
+            <img src="/images/header-logo.gif" alt="" className="logo-img" width={44} height={44} />
             <div className="logo-text-group">
               <span className="logo-brand">OPADOLA CARE INITIATIVES</span>
               <span className="logo-tagline">charity beyond boarders</span>
@@ -167,7 +167,7 @@ export default function Header() {
           <div className="mobile-nav-panel">
             <div className="mobile-nav-header">
               <div className="mobile-nav-header-left">
-                <img src="/images/logo.gif" alt="" className="mobile-nav-logo" />
+                <img src="/images/header-logo.gif" alt="" className="mobile-nav-logo" />
                 <span className="mobile-nav-heading">
                   {activeSubmenu === "about" ? "About Us" : activeSubmenu === "programs" ? "Programs" : "Menu"}
                 </span>

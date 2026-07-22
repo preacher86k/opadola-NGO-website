@@ -1660,93 +1660,17 @@
   margin: 0 auto;
 }
 
-.community-carousel-wrap {
+.community-spin-wrap {
   position: relative;
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-  padding: 1rem 0;
-}
-
-.community-carousel-track {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
-  animation: community-scroll 60s linear infinite;
-}
-
-.community-carousel-wrap:hover .community-carousel-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .community-carousel-track {
-    animation: none;
-  }
-}
-
-@keyframes community-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.community-carousel-item {
-  position: relative;
-  flex-shrink: 0;
-  width: 320px;
-  height: 240px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.5s var(--ease-emphasis), box-shadow 0.5s var(--ease-emphasis);
-}
-
-.community-carousel-item:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-}
-
-.community-carousel-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s var(--ease-emphasis), filter 0.5s var(--ease-out);
+  height: 560px;
+  overflow: hidden;
 }
 
-.community-carousel-item:hover img {
-  transform: scale(1.08);
-  filter: brightness(1.05);
-}
-
-.community-carousel-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem 1rem 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-}
-
-.community-carousel-item:hover .community-carousel-overlay {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.community-carousel-tag {
-  display: inline-block;
-  padding: 0.35rem 0.85rem;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+@media (max-width: 768px) {
+  .community-spin-wrap {
+    height: 400px;
+  }
 }
 
 .community-header {

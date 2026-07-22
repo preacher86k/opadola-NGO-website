@@ -21,7 +21,7 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div style={{ display: "flex", minHeight: "100vh", paddingTop: "64px" }}>
       <aside style={{ width: "240px", background: "var(--bg-secondary)", borderRight: "1px solid var(--border-light)", padding: "1.5rem 0", flexShrink: 0, display: "flex", flexDirection: "column" }}>
         <div style={{ padding: "0 1.5rem 1.5rem", borderBottom: "1px solid var(--border-light)" }}>
           <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--color-primary)" }}>OCI Admin</h2>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PulsingBorder from "@/components/ui/PulsingBorder";
+import SpinImage from "@/components/ui/SpinImage";
 
 export default function HomePage() {
   return (
@@ -186,7 +188,7 @@ export default function HomePage() {
           </div>
 
           <div className="programs-grid">
-            <article className="program-card reveal">
+            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
               <div className="program-card-image">
                 <img src="/images/gallery/IMG_1941.JPG" alt="Education and empowerment programs" loading="lazy" />
               </div>
@@ -207,9 +209,9 @@ export default function HomePage() {
                   </svg>
                 </Link>
               </div>
-            </article>
+            </PulsingBorder>
 
-            <article className="program-card reveal">
+            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
               <div className="program-card-image">
                 <img src="/images/gallery/IMG_1780.JPG" alt="Medical outreach providing care" loading="lazy" />
               </div>
@@ -229,9 +231,9 @@ export default function HomePage() {
                   </svg>
                 </Link>
               </div>
-            </article>
+            </PulsingBorder>
 
-            <article className="program-card reveal">
+            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
               <div className="program-card-image">
                 <img src="/images/gallery/IMG_1295.jpg" alt="Community support distribution" loading="lazy" />
               </div>
@@ -254,9 +256,9 @@ export default function HomePage() {
                   </svg>
                 </Link>
               </div>
-            </article>
+            </PulsingBorder>
 
-            <article className="program-card reveal">
+            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
               <div className="program-card-image">
                 <img src="/images/gallery/IMG_1083%20copy.jpg" alt="Community development" loading="lazy" />
               </div>
@@ -277,7 +279,7 @@ export default function HomePage() {
                   </svg>
                 </Link>
               </div>
-            </article>
+            </PulsingBorder>
           </div>
         </div>
       </section>
@@ -305,7 +307,7 @@ export default function HomePage() {
             </div>
 
             <div className="impact-values reveal-right">
-              <div className="impact-value">
+              <PulsingBorder borderRadius={20} className="impact-value">
                 <div className="impact-value-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -313,9 +315,9 @@ export default function HomePage() {
                 </div>
                 <h3 className="impact-value-title">Compassion</h3>
                 <p className="impact-value-text">We serve with love and empathy.</p>
-              </div>
+              </PulsingBorder>
 
-              <div className="impact-value">
+              <PulsingBorder borderRadius={20} className="impact-value">
                 <div className="impact-value-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -326,9 +328,9 @@ export default function HomePage() {
                 </div>
                 <h3 className="impact-value-title">Empowerment</h3>
                 <p className="impact-value-text">We equip individuals to thrive.</p>
-              </div>
+              </PulsingBorder>
 
-              <div className="impact-value">
+              <PulsingBorder borderRadius={20} className="impact-value">
                 <div className="impact-value-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -336,9 +338,9 @@ export default function HomePage() {
                 </div>
                 <h3 className="impact-value-title">Sustainability</h3>
                 <p className="impact-value-text">We create solutions that last.</p>
-              </div>
+              </PulsingBorder>
 
-              <div className="impact-value">
+              <PulsingBorder borderRadius={20} className="impact-value">
                 <div className="impact-value-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -347,7 +349,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="impact-value-title">Transparency</h3>
                 <p className="impact-value-text">We build trust through accountability.</p>
-              </div>
+              </PulsingBorder>
             </div>
           </div>
         </div>
@@ -395,94 +397,28 @@ export default function HomePage() {
             <p className="community-subtitle">Every photo tells a story of hope, resilience, and change.</p>
           </div>
 
-          <div className="community-carousel-wrap" role="region" aria-label="Community impact carousel" tabIndex={0}>
-            <div className="community-carousel-track">
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1927.JPG" alt="Community outreach distribution event" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Outreach</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1928.JPG" alt="Medical outreach providing healthcare" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Healthcare</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1936.JPG" alt="Youth empowerment program" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Empowerment</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1923.JPG" alt="Volunteers at community event" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Volunteers</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1926.JPG" alt="Community development project" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Development</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1774.JPG" alt="Food distribution" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Food Relief</span>
-                </div>
-              </div>
-              <div className="community-carousel-item">
-                <img src="/images/gallery/IMG_1916.JPG" alt="Elderly care" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Elderly Care</span>
-                </div>
-              </div>
-              {/* Duplicate for seamless loop */}
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1927.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Outreach</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1928.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Healthcare</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1936.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Empowerment</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1923.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Volunteers</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1926.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Development</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1774.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Food Relief</span>
-                </div>
-              </div>
-              <div className="community-carousel-item" aria-hidden="true">
-                <img src="/images/gallery/IMG_1916.JPG" alt="" loading="lazy" />
-                <div className="community-carousel-overlay">
-                  <span className="community-carousel-tag">Elderly Care</span>
-                </div>
-              </div>
-            </div>
+          <div className="community-spin-wrap">
+            <SpinImage
+              images={[
+                { src: "/images/gallery/IMG_1927.JPG" },
+                { src: "/images/gallery/IMG_1928.JPG" },
+                { src: "/images/gallery/IMG_1936.JPG" },
+                { src: "/images/gallery/IMG_1923.JPG" },
+                { src: "/images/gallery/IMG_1926.JPG" },
+                { src: "/images/gallery/IMG_1774.JPG" },
+                { src: "/images/gallery/IMG_1916.JPG" },
+              ]}
+              imageWidth={150}
+              imageHeight={150}
+              direction="anticlockwise"
+              path="straight"
+              xCurve={63}
+              yCurve={-47}
+              speed={2}
+              rounded={7}
+              orbitUnit="%"
+              orbitWidthPct={60}
+            />
           </div>
         </div>
       </section>
@@ -501,7 +437,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="video-wrapper reveal-scale">
+          <PulsingBorder borderRadius={20} className="video-wrapper reveal-scale">
             <div className="video-container">
               <video
                 className="video-player"
@@ -514,13 +450,13 @@ export default function HomePage() {
                 <source src="/images/gallery/VIDEO-2026-07-03-12-43-45.mp4" type="video/mp4" />
               </video>
             </div>
-          </div>
+          </PulsingBorder>
         </div>
       </section>
 
       {/* ============================================
            8. TESTIMONY GRID — Auto Horizontal Carousel
-            ============================================ */}
+           ============================================ */}
       <section className="testimony-carousel-section" aria-labelledby="testimony-heading">
         <div className="container">
           <div className="testimony-header reveal">
@@ -642,7 +578,7 @@ export default function HomePage() {
            ============================================ */}
       <section className="cta-section" aria-label="Call to action and newsletter">
         <div className="container">
-          <div className="cta-container reveal">
+          <PulsingBorder borderRadius={32} className="cta-container reveal">
             <div className="cta-glow" aria-hidden="true" />
 
             <div className="cta-left">
@@ -670,7 +606,7 @@ export default function HomePage() {
                 </button>
               </form>
             </div>
-          </div>
+          </PulsingBorder>
         </div>
       </section>
     </>

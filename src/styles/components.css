@@ -728,3 +728,55 @@
     font-size: 16px;
   }
 }
+
+/* ============================================
+   PULSING BORDER
+   ============================================ */
+
+.pulsing-border {
+  position: relative;
+  border-radius: inherit;
+  will-change: box-shadow;
+  animation: border-glow var(--pulse-speed, 6s) ease-in-out infinite;
+}
+
+@keyframes border-glow {
+  0% {
+    box-shadow:
+      0 0 15px rgba(10, 92, 54, 0.15),
+      0 0 30px rgba(10, 92, 54, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(41, 128, 185, 0.2),
+      0 0 40px rgba(41, 128, 185, 0.12);
+  }
+  100% {
+    box-shadow:
+      0 0 15px rgba(10, 92, 54, 0.15),
+      0 0 30px rgba(10, 92, 54, 0.08);
+  }
+}
+
+/* Dark mode — brighter glow */
+[data-theme="dark"] .pulsing-border {
+  animation-name: border-glow-dark;
+}
+
+@keyframes border-glow-dark {
+  0% {
+    box-shadow:
+      0 0 20px rgba(10, 92, 54, 0.25),
+      0 0 40px rgba(10, 92, 54, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(41, 128, 185, 0.35),
+      0 0 50px rgba(41, 128, 185, 0.18);
+  }
+  100% {
+    box-shadow:
+      0 0 20px rgba(10, 92, 54, 0.25),
+      0 0 40px rgba(10, 92, 54, 0.12);
+  }
+}
