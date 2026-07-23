@@ -61,9 +61,7 @@
 }
 
 [data-theme="dark"] .logo-img {
-  background: #fff;
-  border-radius: 6px;
-  padding: 4px;
+  filter: brightness(0) invert(1);
 }
 
 @keyframes logo-premium {
@@ -544,16 +542,14 @@
 }
 
 .mobile-nav-logo {
-  height: 40px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
 }
 
 [data-theme="dark"] .mobile-nav-logo {
-  background: #fff;
-  border-radius: 4px;
-  padding: 3px;
+  filter: brightness(0) invert(1);
 }
 
 .mobile-nav-heading {
@@ -1074,7 +1070,7 @@
   }
 
   .logo-img {
-    height: 48px;
+    height: 36px;
   }
 
   .logo-brand {

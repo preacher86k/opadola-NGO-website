@@ -5,7 +5,7 @@ const DATABASE_URL = process.env.DATABASE_URL!;
 export async function pgQuery<T extends QueryResultRow = Record<string, unknown>>(
   sql: string,
   params?: unknown[],
-  timeoutMs = 10000
+  timeoutMs = 30000
 ): Promise<QueryResult<T>> {
   const client = new Client({
     connectionString: DATABASE_URL,

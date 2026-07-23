@@ -3,6 +3,8 @@ import { pgQuery } from "@/lib/db";
 
 const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY;
 
+const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function verifyWithPaystack(reference: string): Promise<{ status: string; amount: number } | null> {
   if (!PAYSTACK_SECRET) return null;
 
@@ -24,6 +26,22 @@ async function verifyWithPaystack(reference: string): Promise<{ status: string; 
   }
 }
 
+async function updateDonationStatus(reference: string, maxAttempts = 3): Promise<boolean> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      await pgQuery(
+        'UPDATE "Donation" SET status = $1, "updatedAt" = NOW() WHERE reference = $2 AND status != $1',
+        ["success", reference]
+      );
+      return true;
+    } catch (err) {
+      console.error(`Verify DB update attempt ${attempt}/${maxAttempts} failed for ${reference}:`, err);
+      if (attempt < maxAttempts) await delay(2000);
+    }
+  }
+  return false;
+}
+
 export async function GET(request: NextRequest) {
   const reference = request.nextUrl.searchParams.get("reference");
 
@@ -32,8 +50,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // If DB is available, check and update locally
-    let dbAvailable = true;
     let donation: Record<string, unknown> | null = null;
 
     try {
@@ -42,20 +58,14 @@ export async function GET(request: NextRequest) {
         [reference]
       );
       donation = result.rows[0] || null;
-    } catch {
-      dbAvailable = false;
+    } catch (err) {
+      console.error(`Verify SELECT failed for ${reference}:`, err);
     }
 
-    // Verify with Paystack directly (works without webhook)
     const paystackResult = await verifyWithPaystack(reference);
 
     if (paystackResult && paystackResult.status === "success") {
-      if (dbAvailable && donation) {
-        await pgQuery(
-          'UPDATE "Donation" SET status = $1, "updatedAt" = NOW() WHERE reference = $2 AND status != $1',
-          ["success", reference]
-        ).catch(() => {});
-      }
+      await updateDonationStatus(reference);
 
       if (donation) {
         donation.status = "success";

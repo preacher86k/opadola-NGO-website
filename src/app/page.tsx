@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PulsingBorder from "@/components/ui/PulsingBorder";
 import SpinImage from "@/components/ui/SpinImage";
+import FluidSim from "@/components/ui/FluidSim";
 
 export default function HomePage() {
   return (
@@ -37,6 +38,7 @@ export default function HomePage() {
            1. HERO SECTION
            ============================================ */}
       <section className="hero" id="home" aria-label="Hero section">
+        <FluidSim className="hero-fluid-bg" />
         <div className="hero-atmosphere" aria-hidden="true">
           <div className="atmo-gradient-green" />
           <div className="atmo-gradient-blue" />

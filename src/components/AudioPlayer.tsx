@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 const STORAGE_KEY_ENABLED = "audioEnabled";
 const STORAGE_KEY_VOLUME = "audioVolume";
 const AUDIO_SRC = "/audio/living-hope.m4a";
+const MAX_VOLUME = 0.2;
 
 export default function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -16,8 +17,11 @@ export default function AudioPlayer() {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [ready, setReady] = useState(false);
-  const [gestureDetected, setGestureDetected] = useState(false);
+  const [started, setStarted] = useState(false);
   const [showPanel, setShowPanel] = useState(true);
+
+  const volumeRef = useRef(0);
+  const targetVolumeRef = useRef(0.15);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -27,13 +31,14 @@ export default function AudioPlayer() {
     audio.muted = true;
 
     const savedEnabled = localStorage.getItem(STORAGE_KEY_ENABLED);
-    const savedVolume = localStorage.getItem(STORAGE_KEY_VOLUME);
-    const parsedVol = savedVolume ? parseFloat(savedVolume) : 0.15;
-
-    if (savedEnabled === "true") {
-      setVolume(parsedVol);
-      setMuted(false);
+    if (savedEnabled === "false") {
+      setClosed(true);
+      return;
     }
+
+    const savedVolume = localStorage.getItem(STORAGE_KEY_VOLUME);
+    const vol = savedVolume ? parseFloat(savedVolume) : 0.15;
+    targetVolumeRef.current = vol;
 
     const onCanPlay = () => {
       setReady(true);
@@ -54,7 +59,6 @@ export default function AudioPlayer() {
     audio.addEventListener("canplay", onCanPlay);
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("ended", onEnded);
-
     audio.load();
 
     return () => {
@@ -66,55 +70,73 @@ export default function AudioPlayer() {
 
   const startPlayback = useCallback(() => {
     const audio = audioRef.current;
-    if (!audio || gestureDetected) return;
+    if (!audio || started) return;
 
-    setGestureDetected(true);
-
-    const savedEnabled = localStorage.getItem(STORAGE_KEY_ENABLED);
-    if (savedEnabled === "false") {
-      setShowPanel(false);
-      return;
-    }
-
-    const savedVolume = localStorage.getItem(STORAGE_KEY_VOLUME);
-    const vol = savedVolume ? parseFloat(savedVolume) : 0.15;
+    setStarted(true);
+    setShowPanel(false);
 
     audio.muted = false;
     audio.volume = 0;
+    volumeRef.current = 0;
 
     audio.play().then(() => {
       setMuted(false);
       setPlaying(true);
-      setShowPanel(false);
-
-      let current = 0;
-      const target = vol;
-      const step = target / 60;
-      const fade = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          current = target;
-          clearInterval(fade);
-        }
-        audio.volume = current;
-      }, 50);
     }).catch(() => {});
-  }, [gestureDetected]);
+  }, [started]);
 
   useEffect(() => {
-    if (gestureDetected) return;
+    if (started) return;
 
-    const handler = () => startPlayback();
-    document.addEventListener("click", handler, { once: true });
-    document.addEventListener("touchstart", handler, { once: true });
-    document.addEventListener("keydown", handler, { once: true });
+    const tryStart = () => startPlayback();
+    document.addEventListener("click", tryStart, { once: true });
+    document.addEventListener("touchstart", tryStart, { once: true });
+    document.addEventListener("keydown", tryStart, { once: true });
+    document.addEventListener("scroll", tryStart, { once: true });
 
     return () => {
-      document.removeEventListener("click", handler);
-      document.removeEventListener("touchstart", handler);
-      document.removeEventListener("keydown", handler);
+      document.removeEventListener("click", tryStart);
+      document.removeEventListener("touchstart", tryStart);
+      document.removeEventListener("keydown", tryStart);
+      document.removeEventListener("scroll", tryStart);
     };
-  }, [gestureDetected, startPlayback]);
+  }, [started, startPlayback]);
+
+  useEffect(() => {
+    if (!started || !playing) return;
+
+    function handleScroll() {
+      const scrollPct = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight || 1), 1);
+      const target = Math.min(scrollPct * targetVolumeRef.current * 5, targetVolumeRef.current);
+      targetVolumeRef.current = Math.max(target, 0.02);
+    }
+
+    function rampVolume() {
+      const audio = audioRef.current;
+      if (!audio || audio.paused) return;
+
+      const current = volumeRef.current;
+      const target = targetVolumeRef.current;
+      const diff = target - current;
+
+      if (Math.abs(diff) > 0.001) {
+        const next = current + diff * 0.03;
+        volumeRef.current = next;
+        audio.volume = next;
+        setVolume(next);
+      }
+
+      requestAnimationFrame(rampVolume);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    const raf = requestAnimationFrame(rampVolume);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [started, playing]);
 
   function togglePlay() {
     const audio = audioRef.current;
@@ -148,6 +170,8 @@ export default function AudioPlayer() {
 
     const vol = parseFloat(e.target.value);
     setVolume(vol);
+    volumeRef.current = vol;
+    targetVolumeRef.current = vol;
     audio.volume = muted ? 0 : vol;
     localStorage.setItem(STORAGE_KEY_VOLUME, vol.toString());
 
@@ -200,7 +224,7 @@ export default function AudioPlayer() {
   if (!expanded) {
     return (
       <>
-        <audio ref={audioRef} preload="metadata" loop>
+        <audio ref={audioRef} preload="auto" loop>
           <source src={AUDIO_SRC} type="audio/mp4" />
         </audio>
         <button className="lh-collapsed" onClick={handleExpand} aria-label="Expand Living Hope player">
@@ -213,11 +237,11 @@ export default function AudioPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} preload="metadata" loop>
+      <audio ref={audioRef} preload="auto" loop>
         <source src={AUDIO_SRC} type="audio/mpeg" />
       </audio>
 
-      {showPanel && !gestureDetected && (
+      {showPanel && !started && (
         <div className="lh-prep-panel">
           <div className="lh-prep-inner">
             <span className="lh-prep-icon">♪</span>
@@ -232,7 +256,7 @@ export default function AudioPlayer() {
         </div>
       )}
 
-      <div className={`lh-dock${gestureDetected ? " lh-dock--active" : ""}`}>
+      <div className={`lh-dock${started ? " lh-dock--active" : ""}`}>
         <div className="lh-dock-glow" aria-hidden="true" />
 
         <div className="lh-dock-row">
@@ -272,6 +296,8 @@ export default function AudioPlayer() {
             <button className="lh-btn" onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"}>
               {muted || volume === 0 ? (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              ) : volume < 0.1 ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/></svg>
               ) : volume < 0.2 ? (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
               ) : (
@@ -282,7 +308,7 @@ export default function AudioPlayer() {
               type="range"
               className="lh-volume-slider"
               min="0"
-              max="0.25"
+              max={MAX_VOLUME.toString()}
               step="0.01"
               value={muted ? 0 : volume}
               onChange={handleVolumeChange}

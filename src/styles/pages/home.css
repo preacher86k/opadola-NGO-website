@@ -17,6 +17,22 @@
   overflow: hidden;
 }
 
+/* WebGL fluid trail background */
+.hero-fluid-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.18;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+}
+
+[data-theme="dark"] .hero-fluid-bg {
+  opacity: 0.12;
+}
+
 /* Ambient light behind hero */
 .hero::before {
   content: '';
