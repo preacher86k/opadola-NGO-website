@@ -1074,11 +1074,11 @@
   }
 
   .logo-brand {
-    font-size: clamp(0.75rem, 3.5vw, 1rem);
+    font-size: clamp(0.85rem, 4.5vw, 1.15rem);
   }
 
   .logo-tagline {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
 
   .logo-text-group {
@@ -1263,9 +1263,6 @@
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
-  background: #fff;
-  border-radius: 8px;
-  padding: 5px;
 }
 
 .footer-logo .logo-brand {
