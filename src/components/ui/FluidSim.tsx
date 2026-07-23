@@ -26,9 +26,9 @@ const BRAND_COLORS: [number, number, number][] = [
   [0.161, 0.502, 0.725],
 ]
 
-const SPLAT_FORCE = 2500
+const SPLAT_FORCE = 4000
 const PRESSURE_ITERATIONS = 20
-const CURL_STRENGTH = 15
+const CURL_STRENGTH = 20
 const SIM_RESOLUTION_DESKTOP = 128
 const SIM_RESOLUTION_MOBILE = 64
 const DYE_RESOLUTION_DESKTOP = 1024
@@ -472,7 +472,7 @@ export default function FluidSim({ className = "", style }: { className?: string
     function applyPointerInput() {
       if (pointer.moved) {
         const c = BRAND_COLORS[pointer.colorIdx % BRAND_COLORS.length]
-        const col: [number, number, number] = [c[0] * 0.35, c[1] * 0.35, c[2] * 0.35]
+        const col: [number, number, number] = [c[0] * 0.5, c[1] * 0.5, c[2] * 0.5]
         pointer.colorIdx++
         splatAt(pointer.x, pointer.y, pointer.dx * SPLAT_FORCE, pointer.dy * SPLAT_FORCE, col)
         pointer.moved = false
@@ -484,10 +484,10 @@ export default function FluidSim({ className = "", style }: { className?: string
       autoDriftT += 0.016
       const pos = lissajousPoint(autoDriftT, 1)
       const prevPos = lissajousPoint(autoDriftT - 0.016, 1)
-      const dx = (pos.x - prevPos.x) * SPLAT_FORCE * 0.1
-      const dy = (pos.y - prevPos.y) * SPLAT_FORCE * 0.1
+      const dx = (pos.x - prevPos.x) * SPLAT_FORCE * 0.2
+      const dy = (pos.y - prevPos.y) * SPLAT_FORCE * 0.2
       const c = BRAND_COLORS[Math.floor(autoDriftT) % BRAND_COLORS.length]
-      const col: [number, number, number] = [c[0] * 0.15, c[1] * 0.15, c[2] * 0.15]
+      const col: [number, number, number] = [c[0] * 0.25, c[1] * 0.25, c[2] * 0.25]
       splatAt(pos.x, pos.y, dx, dy, col)
     }
 
@@ -559,10 +559,10 @@ export default function FluidSim({ className = "", style }: { className?: string
       gl!.uniform1i(gl!.getUniformLocation(pAdvect, "u_velocity")!, velocity.read.attach(0))
       gl!.uniform1i(gl!.getUniformLocation(pAdvect, "u_source")!, dye.read.attach(1))
       gl!.uniform1f(gl!.getUniformLocation(pAdvect, "u_dt")!, dt)
-      const dur = isMobile() ? 1.5 : 2.5
+      const dur = isMobile() ? 3 : 4
       const dyeDiss = 3 / dur
       gl!.uniform1f(gl!.getUniformLocation(pAdvect, "u_dissipation")!, 1 - dyeDiss * dt)
-      gl!.uniform1f(gl!.getUniformLocation(pAdvect, "u_outward")!, 0.2 * dt)
+      gl!.uniform1f(gl!.getUniformLocation(pAdvect, "u_outward")!, 0.3 * dt)
       blit(dye.write)
       dye.swap()
     }

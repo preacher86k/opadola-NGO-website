@@ -1,7 +1,12 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import PulsingBorder from "@/components/ui/PulsingBorder";
 import SpinImage from "@/components/ui/SpinImage";
 import FluidSim from "@/components/ui/FluidSim";
+import AnimatedText from "@/components/ui/AnimatedText";
+import MagneticButton from "@/components/ui/MagneticButton";
+import MorphBlob from "@/components/ui/MorphBlob";
+import RevealOnScroll from "@/components/ui/RevealOnScroll";
 
 export default function HomePage() {
   return (
@@ -54,10 +59,17 @@ export default function HomePage() {
         <div className="container">
           <div className="hero-grid">
             <div className="hero-content">
-              <h1 className="hero-title reveal">
-                Building <span className="text-green">Hope.</span><br />
-                Transforming <span className="text-green">Lives.</span><br />
-                Creating Legacy.
+              <h1 className="hero-title">
+                <AnimatedText
+                  delay={0.2}
+                  stagger={0.15}
+                  lines={[
+                    <Fragment key="0">Building <span className="text-green">Hope.</span></Fragment>,
+                    <Fragment key="1">Transforming</Fragment>,
+                    <Fragment key="2"><span className="text-green">Lives.</span></Fragment>,
+                    <Fragment key="3">Creating Legacy.</Fragment>,
+                  ]}
+                />
               </h1>
 
               <p className="hero-description reveal">
@@ -65,29 +77,29 @@ export default function HomePage() {
               </p>
 
               <div className="hero-actions reveal">
-                <Link href="/donate" className="btn btn-primary btn-lg">
+                <MagneticButton href="/donate" className="btn btn-primary btn-lg">
                   Donate Now
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
-                </Link>
-                <Link href="/programs" className="btn btn-outline btn-lg">
+                </MagneticButton>
+                <MagneticButton href="/programs" className="btn btn-outline btn-lg" strength={0.25}>
                   Explore Our Work
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M5 12h14" />
                     <path d="M12 5l7 7-7 7" />
                   </svg>
-                </Link>
+                </MagneticButton>
               </div>
             </div>
 
             <div className="hero-visual reveal-right">
-              <div className="hero-image-wrapper">
+              <div className="hero-image-wrapper" data-parallax="0.08">
                 <img
                   src="/images/gallery/IMG_1939.JPG"
                   alt="Opadola Care Initiative community outreach program"
                   loading="eager"
-                  className="hero-image"
+                  className="hero-image ken-burns"
                 />
 
                 <div className="hero-decorations" aria-hidden="true">
@@ -190,98 +202,110 @@ export default function HomePage() {
           </div>
 
           <div className="programs-grid">
-            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
-              <div className="program-card-image">
-                <img src="/images/gallery/IMG_1941.JPG" alt="Education and empowerment programs" loading="lazy" />
-              </div>
-              <div className="program-card-content">
-                <div className="program-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                  </svg>
+            <RevealOnScroll delay={0} className="program-card-wrapper">
+              <PulsingBorder borderRadius={20} as="article" className="program-card program-card-hover">
+                <div className="program-card-image">
+                  <img src="/images/gallery/IMG_1941.JPG" alt="Education and empowerment programs" loading="lazy" />
                 </div>
-                <h3 className="program-card-title">Education</h3>
-                <p className="program-card-text">Empowering minds for a brighter future.</p>
-                <Link href="/programs" className="program-card-link">
-                  Learn More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </PulsingBorder>
+                <div className="program-card-content">
+                  <div className="program-card-icon">
+                    <MorphBlob color="var(--color-primary)" size={90} duration={14} />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                  </div>
+                  <h3 className="program-card-title">Education</h3>
+                  <p className="program-card-text">Empowering minds for a brighter future.</p>
+                  <Link href="/programs" className="program-card-link">
+                    Learn More
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M5 12h14" />
+                      <path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </PulsingBorder>
+            </RevealOnScroll>
 
-            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
-              <div className="program-card-image">
-                <img src="/images/gallery/IMG_1780.JPG" alt="Medical outreach providing care" loading="lazy" />
-              </div>
-              <div className="program-card-content">
-                <div className="program-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                  </svg>
+            <RevealOnScroll delay={0.12} className="program-card-wrapper">
+              <PulsingBorder borderRadius={20} as="article" className="program-card program-card-hover">
+                <div className="program-card-image">
+                  <img src="/images/gallery/IMG_1780.JPG" alt="Medical outreach providing care" loading="lazy" />
                 </div>
-                <h3 className="program-card-title">Healthcare</h3>
-                <p className="program-card-text">Improving health, transforming lives.</p>
-                <Link href="/programs" className="program-card-link">
-                  Learn More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </PulsingBorder>
+                <div className="program-card-content">
+                  <div className="program-card-icon">
+                    <MorphBlob color="#2980B9" size={90} duration={16} delay={1} />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                  </div>
+                  <h3 className="program-card-title">Healthcare</h3>
+                  <p className="program-card-text">Improving health, transforming lives.</p>
+                  <Link href="/programs" className="program-card-link">
+                    Learn More
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M5 12h14" />
+                      <path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </PulsingBorder>
+            </RevealOnScroll>
 
-            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
-              <div className="program-card-image">
-                <img src="/images/gallery/IMG_1295.jpg" alt="Community support distribution" loading="lazy" />
-              </div>
-              <div className="program-card-content">
-                <div className="program-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
+            <RevealOnScroll delay={0.24} className="program-card-wrapper">
+              <PulsingBorder borderRadius={20} as="article" className="program-card program-card-hover">
+                <div className="program-card-image">
+                  <img src="/images/gallery/IMG_1295.jpg" alt="Community support distribution" loading="lazy" />
                 </div>
-                <h3 className="program-card-title">Child &amp; Youth</h3>
-                <p className="program-card-text">Nurturing today&apos;s children for tomorrow.</p>
-                <Link href="/programs" className="program-card-link">
-                  Learn More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </PulsingBorder>
+                <div className="program-card-content">
+                  <div className="program-card-icon">
+                    <MorphBlob color="var(--color-primary)" size={90} duration={13} delay={2} />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <h3 className="program-card-title">Child &amp; Youth</h3>
+                  <p className="program-card-text">Nurturing today&apos;s children for tomorrow.</p>
+                  <Link href="/programs" className="program-card-link">
+                    Learn More
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M5 12h14" />
+                      <path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </PulsingBorder>
+            </RevealOnScroll>
 
-            <PulsingBorder borderRadius={20} as="article" className="program-card reveal">
-              <div className="program-card-image">
-                <img src="/images/gallery/IMG_1083%20copy.jpg" alt="Community development" loading="lazy" />
-              </div>
-              <div className="program-card-content">
-                <div className="program-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    <polyline points="9 22 9 12 15 12 15 22" />
-                  </svg>
+            <RevealOnScroll delay={0.36} className="program-card-wrapper">
+              <PulsingBorder borderRadius={20} as="article" className="program-card program-card-hover">
+                <div className="program-card-image">
+                  <img src="/images/gallery/IMG_1083%20copy.jpg" alt="Community development" loading="lazy" />
                 </div>
-                <h3 className="program-card-title">Community Development</h3>
-                <p className="program-card-text">Building stronger, sustainable communities.</p>
-                <Link href="/programs" className="program-card-link">
-                  Learn More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </PulsingBorder>
+                <div className="program-card-content">
+                  <div className="program-card-icon">
+                    <MorphBlob color="#2980B9" size={90} duration={15} delay={3} />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  </div>
+                  <h3 className="program-card-title">Community Development</h3>
+                  <p className="program-card-text">Building stronger, sustainable communities.</p>
+                  <Link href="/programs" className="program-card-link">
+                    Learn More
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M5 12h14" />
+                      <path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </PulsingBorder>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
