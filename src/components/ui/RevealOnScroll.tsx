@@ -35,7 +35,7 @@ export default function RevealOnScroll({
       transition={{
         duration: 0.8,
         delay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       }}
     >
       {children}
