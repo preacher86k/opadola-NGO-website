@@ -51,7 +51,7 @@
 }
 
 .logo-img {
-  height: 46px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
@@ -63,7 +63,7 @@
 [data-theme="dark"] .logo-img {
   background: #fff;
   border-radius: 6px;
-  padding: 3px;
+  padding: 4px;
 }
 
 @keyframes logo-premium {
@@ -544,7 +544,7 @@
 }
 
 .mobile-nav-logo {
-  height: 32px;
+  height: 40px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
@@ -553,7 +553,7 @@
 [data-theme="dark"] .mobile-nav-logo {
   background: #fff;
   border-radius: 4px;
-  padding: 2px;
+  padding: 3px;
 }
 
 .mobile-nav-heading {
@@ -1074,7 +1074,7 @@
   }
 
   .logo-img {
-    height: 40px;
+    height: 48px;
   }
 
   .logo-brand {
@@ -1263,17 +1263,13 @@
 }
 
 .footer-logo-img {
-  height: 48px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
-  mix-blend-mode: multiply;
-}
-
-[data-theme="dark"] .footer-logo-img {
   background: #fff;
-  border-radius: 6px;
-  padding: 3px;
+  border-radius: 8px;
+  padding: 5px;
 }
 
 .footer-logo .logo-brand {

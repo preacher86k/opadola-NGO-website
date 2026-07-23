@@ -106,7 +106,7 @@ export default function Header() {
       <header className="header" role="banner">
         <div className="header-inner">
           <Link href="/" className="logo" aria-label="Opadola Care Initiative - Home">
-            <img src="/images/header-logo.gif" alt="" className="logo-img" width={44} height={44} />
+            <img src="/images/header-logo.gif" alt="" className="logo-img" width={56} height={56} />
             <div className="logo-text-group">
               <span className="logo-brand">OPADOLA CARE INITIATIVES</span>
               <span className="logo-tagline">charity beyond boarders</span>

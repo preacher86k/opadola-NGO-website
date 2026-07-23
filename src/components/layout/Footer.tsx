@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link href="/" className="footer-logo">
-              <img src="/images/footer-logo.png" alt="" className="footer-logo-img" width={36} height={36} />
+              <img src="/images/footer-logo.png" alt="" className="footer-logo-img" width={56} height={56} />
               <div className="logo-text-group">
                 <span className="logo-brand">OPADOLA CARE INITIATIVES</span>
                 <span className="logo-tagline">charity beyond boarders</span>
